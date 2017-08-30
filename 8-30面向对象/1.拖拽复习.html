@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				position:absolute;
+				top:0;
+				left:0;
+				color:#fff;
+				font:50px/100px "宋体";
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box">div1</div>
+		
+		<script>
+
+		/*
+			拖拽函数封装
+				需求：
+					封装一个函数，元素调用的时候实现拖拽功能；
+				要求：
+					运用面向对象的方法：
+				分析：
+					封装一个构造函数，使用new 创建对象;
+					因为要通用，把函数放在原型Drag.prototype上；
+					function Drag(){
+	
+					}
+					
+
+		*/
+			let box = document.getElementById("box");
+			/*
+			方法一：
+
+
+			function Drag (dragBox){
+
+				this.dragBox = dragBox;
+			}
+			Drag.prototype.init = function (){
+				console.log(this);//指向的是创建出来的隐式对象，函数由t调用，两个this指向的同一个对象;
+				this.dragBox.onmousedown = this.downFn.bind(this);//改变this指向使函数在调用时候的this指向创建出来的对象，
+				
+			}
+			Drag.prototype.downFn = function(ev){
+				//console.log(this);//this指向的是元素；所以在调用的时候更改this指向为创建出来的对象
+				this.disX = ev.clientX - this.dragBox.offsetLeft;
+				this.disY = ev.clientY - this.dragBox.offsetTop;
+				console.log(this.disX,this.disY);
+				document.onmousemove = this.moveFn.bind(this);
+				document.onmouseup = this.upFn.bind(this);
+			}
+			Drag.prototype.moveFn = function(ev){
+				this.dragBox.style.left = ev.clientX - this.disX + "px";
+				this.dragBox.style.top = ev.clientY - this.disY + "px";
+			}
+			Drag.prototype.upFn = function(){
+				document.onmousemove = document.onmouseup = null;
+			}
+			let t = new Drag(box);
+			t.init();*/
+
+
+			/*
+				new 调用一个函数做了哪些事情：
+					1.在函数的内部隐式创建一个对象；
+					2.将函数的this => 隐式生成的对象；
+					3.执行函数，在对象上添加属性;
+					4.把隐式的对象返回出去；
+
+				1.new Drag 之后，会在Drag函数内部创建一个对象（yinshiObj）;
+				2.Drag函数中的this => 的Obj;
+				3.把yinshiObj返回出来了;
+				4.new Drag()之后把隐式的对象赋值给了t;
+				5.t.init()调用之后，init函数中的this => t,也就是yinshiObj;
+			*/
+
+			// 方法二：
+			function Drag (){
+
+			}
+			Drag.prototype.init = function(dragBox){
+				//console.log(this);//init函数中的this => 隐式创建出来的对象;
+				//init函数是new出来的对象调用的，this指向的是对象；
+				this.dragBox = dragBox;
+				//console.log(this.dragBox);
+				this.dragBox.onmousedown = this.downFn.bind(this);//this.downFn指的是这个对象上的downFn函数
+			}
+			Drag.prototype.downFn = function(ev){
+				//console.log(this);//this.指向的是对象，而在调用的时候是由div元素调用的，调用的时候需要改变this指向；
+				this.disX = ev.clientX - this.dragBox.offsetLeft;
+				this.disY = ev.clientY - this.dragBox.offsetTop;
+				document.onmousemove = this.moveFn.bind(this);//鼠标移动
+				document.onmouseup = this.upFn.bind(this);//鼠标抬起
+			}
+			Drag.prototype.moveFn = function(ev){
+				//console.log(this);//函数中的this指向的是对象，调用的时候this指向document；需要在调用的时候改变this指向；
+				this.dragBox.style.left = ev.clientX - this.disX + "px";
+				this.dragBox.style.top = ev.clientY - this.disY + "px";
+			}
+			Drag.prototype.upFn = function(){
+				document.onmousemove = document.onmouseup = null;
+			}
+			let t = new Drag();
+			t.init(box);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		
+		<script>
+			/*
+				该方法仅试用于原生的函数使用bind;
+
+			*/
+			let fn = function (){
+				console.log(this);
+			}
+			let fn2 = function (){
+				console.log(this);
+			}.bind(this);
+			console.log(fn.name);//fn
+			console.log(fn2.name);//bound 
+		</script>
+	</body>
+</html>

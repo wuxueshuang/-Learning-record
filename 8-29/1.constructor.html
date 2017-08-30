@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				constractor 
+					函数的原型是一个对象，对象初始的时候有一个属性为constractor;
+					constractor的值指向的是拥有这个原型的函数 => 由构造函数创建出来的对象;
+					constructor 可以被改写，所以判断一个对象属于哪个类型有问题
+			*/
+		</script>
+	</head>
+
+	<body>
+		<script>
+			function Info (){
+
+			}
+			//如果通过构造函数创建的元素不需要传参，构造函数的括号就可以省略;
+			let t1 = new Info;
+			console.log(t1);//由构造函数创建出来的对象；
+			console.log(Info.prototype.constructor);//构造函数原型上的constractor//指向的是Info这个函数
+
+			let t2 = new Info;
+			//console.log(t2.prototype == t1.prototype);//由一个构造函数创建出来的元素的构造函数的原型相同;
+			
+			console.log(Info.constructor===Info);//true
+			console.log(t1.constructor===Info);//false
+
+
+			//constractor 可以被改写：
+			Info.prototype.constractor = function () {
+				console.log("aaa");
+			};
+			console.log(Info.constructor===Info);//false
+			console.log(t1.constructor===Info);//true
+
+
+
+			console.log(t1.prototype);//通过构造函数Info创建出来的t1.身上没有prototype。打印出来的是undefined;
+			
+			let arr = new Array();
+			let obj = new Object();
+			console.log(arr.constructor === Array);//true
+			console.log(obj.constructor === Object);//true
+				
+
+			
+			
+
+		</script>
+	</body>
+</html>

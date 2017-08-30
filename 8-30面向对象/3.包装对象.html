@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+					包装对象
+						String();
+						Number();
+						Boolean();
+
+					对象都是数据，数据不一定是对象；
+
+					只有对象才有属性
+					
+
+
+
+			*/
+
+
+			let  str = "miaov";//只是值，不是对象;
+
+			//str 只是一个字符串，字符串本身没有方法；当调用slice的时候内部会把str包装成一个对象，然后再调用slice方法；对象身上有方法，这样就可以调用了;
+
+			str.slice(2,-1);
+
+			str.acb = 10;//给字符串添加属性，内部会调用String()方法，将str包装成一个对象，在添加属性；
+			console.log(str.acb);//undefined；原因就是使用完包装对象之后立马销毁了，添加属性的时候进行包装，然后赋值完立马销毁，打印的时候再次包装但是没有赋值，所以是undefined；
+
+
+			let str2 = new String ("happy");
+			console.log(str.slice);//function slice() { [native code] }内置函数;
+			console.log(str2.valueOf());//拿到字符串的原始值；happy
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

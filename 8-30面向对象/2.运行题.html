@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			let obj = {
+				fn : function (){
+					console.log(this);
+				}
+			}
+
+
+			//把obj的fn对应的值是一个函数取出来，执行，看括号前面有没有.有点说明是调用的，this就指向.前面的元素；
+			obj.fn();//Object
+
+			//把obj.fn对应的值取出来赋值给f这个变量；也就是把fn对应的函数赋值给变量f；
+			let f = obj.fn;
+
+			//函数直接调用，this 指向的是window;
+			f();//window 
+
+/*------------------------------------------------------------------------------------------*/
+			
+
+			let fn1 = function (){
+				console.log(this);
+			}
+
+			let fn = fn1;
+			fn();
+		</script>
+	</body>
+</html>

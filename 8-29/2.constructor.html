@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			function Info (){
+
+			}
+			/*
+				给一个构造函数原型上添加多个方法：
+
+			*/
+			Info.prototype.fn1 = function(){
+
+			}
+			Info.prototype.fn2 = function(){
+				
+			}
+			Info.prototype.fn3 = function(){
+				
+			}
+			Info.prototype.fn4 = function(){
+				
+			}
+			Info.prototype.fn5 = function(){
+				
+			}
+			console.log(Info.prototype);
+			//这种方法太繁琐，通常我们不这样做；
+			//我们把药添加的方法放到个对象里，在赋给构造函数的原型；
+			//这样写就把函数的原型改变了，原型中的constructor就没有了；需要手动的把constructor改回来
+			Info.prototype = {
+				constructor = Info,
+				fn1(){
+
+				},
+				fn2(){
+
+				},
+				fn3(){
+
+				},
+				fn4(){
+
+				},
+				fn5(){
+
+				},
+			}
+			console.log(Info.prototype);
+		</script>
+	</body>
+</html>

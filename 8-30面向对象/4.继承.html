@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				继承父级的属性：
+					在子级的函数中将父级的this改变为子级；
+			*/
+			//父类 基类 
+			function Person (name,age){
+				this.name = name;
+				this.age = age;
+			}
+			Person.prototype.speak = function(){
+				console.log("我会说话");
+			}
+			//let p1 = new Person("momo",35); 
+
+
+			function Coder(name,age,money){
+				//将父级中的属性，放在Coder的this上；
+				//把Person中的this改变为Coder中的this指向;
+				Person.call(this,name,age);
+				this.money = money;
+			}
+
+			Coder.prototype.coding = function(){
+				console.log("我会敲代码");
+			}
+
+
+			let coder1 = new Coder("duoduo",25,10000);
+			console.log(coder1);
+
+			coder1.coding();
+		</script>
+	</body>
+</html>

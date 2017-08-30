@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				instanceof
+					二元运算符：
+						对象(被检测的对象) instanceof 函数（构造函数）
+						描述有问题：
+							简单理解：
+								运算一下，这个函数是不是这个对象的构造函数；
+						正确理解：
+							运算一下这个函数是不是在这个对象的原型链上;//仍然有问题；
+						是；true;
+						不是：false;
+			*/
+			function Info(){
+
+			}
+			Info.prototype = {
+				fn1(){},
+				fn2(){},
+				fn3(){}
+			}
+			let in1 = new Info();
+			console.log(in1 instanceof Info);//true  构造函数
+			console.log(in1 instanceof Array);//false
+			console.log(in1 instanceof Object);//true //构造函数原型链上
+		</script>	
+	</head>
+
+	<body>
+		
+	</body>
+</html>

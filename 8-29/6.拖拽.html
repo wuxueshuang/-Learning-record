@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				position:absolute;
+				top:0;
+				left:0;
+				color:#fff;
+				font:50px/100px "宋体";
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box">div1</div>
+		<div id = "box2">div2</div>
+		<script>
+			let box = document.getElementById("box");
+			let box2 = document.getElementById("box2");
+			function Drag (DragBox){
+				this.DragBox = DragBox;
+				this.disX = 0; 
+				this.disY = 0; 
+			}
+			Drag.prototype.init = function(){
+				console.log(this);//生成出来的对象;
+				this.DragBox.onmousedown = this.downFn.bind(this);//改变this指向，指向调用的元素；(init中的this);
+			}
+			Drag.prototype.downFn = function(ev){
+				//console.log(this,this.DragBox);
+				this.disX = ev.clientX - this.DragBox.offsetLeft;
+				this.disY = ev.clientY - this.DragBox.offsetTop;
+				//console.log(this.disX,this.disY);
+				//console.log("鼠标按下");
+				document.onmousemove = this.moveFn.bind(this);
+				document.onmouseup = this.upFn.bind(this);
+			}
+			Drag.prototype.moveFn =function (ev){				
+				//console.log(this.disX,this.disY);
+				this.DragBox.style.left = ev.clientX - this.disX + "px";
+				this.DragBox.style.top = ev.clientY - this.disY + "px";
+			}
+			Drag.prototype.upFn =function (ev){
+				document.onmousemove = document.onmouseup = null;
+			}
+			let b1 = new Drag(box);
+			b1.init();
+			let b2 = new Drag(box2);
+			b2.init();
+		</script>
+	</body>
+</html>

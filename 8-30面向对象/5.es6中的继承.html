@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				使用关键字class来定义类:
+					class  类名也叫做父类/基类{
+							
+						//创建对象的属性
+						constructor(){
+							
+						}
+
+						共享的方法,不能定义共享的属性
+						speak(){
+	
+						}
+						job(){
+	
+						}
+					}
+
+					class 子类{
+						super();
+						子类中要有父级的属性和方法，子类必须在constructor方法中调用super方法，
+						否则新建实例时会报错。这是因为子类没有自己的this对象，然后对其进行加
+						工。如果不调用super()方法，子类就得不到this对象.
+
+					}
+			*/
+		</script>
+	</head>
+
+	<body>
+		<script>
+			"use strict"//开启严格模式
+			class Person {
+				constructor (name,age){
+					this.name = name;
+					this.age = age;
+				}
+				speak (){
+					console.log("I can speaking");
+				}
+			}
+			//Coder要有Person的属性和方法;
+			class Coder extends Person {
+				constructor (name,age,money){
+					//super作为函数，就是构造函数;
+					super(name,age);
+					this.money = money;
+				}
+				coding(){
+					console.log("I can Coding");
+				}
+			}
+			let c1 = new　Coder("dodo",25,10000);
+
+			//当不传值的时候，类中可以不用写constructor
+			let c2 = new Coder();
+			console.log(c1);
+		</script>
+	</body>
+</html>

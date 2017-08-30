@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			//父类 基类
+			function Person (name,age){
+				this.name = name;
+				this.age = age;
+			}
+			Person.prototype.speak = function(){
+				console.log("I can speaking");
+			}
+
+			//程序员 子类
+			/*
+				让程序员这个子类拥有父类的属性和方法：
+				构造函数：(类式继承)
+					call或aplly
+			*/
+			function Coder (name,age,money){
+				//将父级中的构造函数的属性放在子类上；
+				//将父级Person中的this指向Coder;同时继承哪个属性就在this后传入哪个属性;
+				Person.call(this,name,age);
+				this.money = money;
+			}
+			Coder.prototype.coding = function(){
+				console.log("I can coding");
+			}
+		</script>
+	</body>
+</html>
