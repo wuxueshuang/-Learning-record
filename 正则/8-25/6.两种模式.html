@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				贪婪模式：
+					尽可能匹配多的
+				懒惰模式：
+					尽可能匹配少的
+				开启懒惰模式：
+					?
+			*/
+
+			let str = 'a123ca45abc6cmiaov';
+			//规则：a开始，c结束，中间是字母，数字，下划线
+			let re = /a\w+c/g;
+			console.log(str.match(re));//贪婪模式：let str = 'a123ca45abc6cmiaov';
+		
+			let re2 = /a\w+?c/g;
+			console.log(str.match(re2));//懒惰模式["a123c", "a45abc"]
+		</script>
+	</body>
+</html>

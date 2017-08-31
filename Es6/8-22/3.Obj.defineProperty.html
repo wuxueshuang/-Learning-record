@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value="改变数据name" id="btn" />
+		<input type="button" value="改变数据age" id="btn2" />
+		<input type="button" value="改变数据sex" id="btn3" />
+		<ul id="list">
+			<li>leo</li>
+			<li>age</li>
+			<li>sex</li>
+		</ul>
+		<script>
+			let data = {
+				userName : "leo",
+				age : 30,
+				sex : "男",
+			}
+			var userVal = data.userName;
+			//console.log(userVal);
+			Object.defineProperty(data,"userName",{
+				/*get:function(){
+					//console.log(userVal);
+					return userVal;
+				},*/
+				set:function(newValue){
+					console.log(userVal);
+					userVal = newValue;
+					console.log(userVal);
+					render();
+				}
+			});
+
+			var ageVal = data.age;
+			Object.defineProperty(data,"age",{
+				get:function(){
+					return ageVal;
+				},
+				set:function(newValue){
+					ageVal = newValue;
+					render();
+				}
+			});
+
+			var sexVal = data.sex;
+			Object.defineProperty(data,"sex",{
+				get:function(){
+					return sexVal;
+				},
+				set:function(newValue){
+					sexVal = newValue;
+					render();
+				}
+			});
+			//渲染结构的方法：
+			function render(){
+				var html = "";
+				for(var attr in data){
+					html += `<li>${data[attr]}</li>`;
+				}
+				list.innerHTML = html;
+			}
+			
+
+			/*
+				点击按钮之后改变对应的数据然后重新渲染结构；
+				但是这样写增加了浏览器的负担，每次点击都要重新渲染一遍，我们想要的是点击之后只改变数据，结构随数据的变化而变化；
+			*/
+			btn.onclick = function(){
+				data.userName = "momo";//点击之后改变数据然后重新渲染结构
+				//list.innerHTML = render();
+			}
+			btn2.onclick = function(){
+				data.age = "35";
+				//list.innerHTML = render();
+			}
+			btn3.onclick = function(){
+				data.sex = "女";
+				//list.innerHTML = render();
+			}
+		</script>
+	</body>
+</html>

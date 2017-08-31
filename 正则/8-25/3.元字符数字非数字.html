@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				\d:数字
+				\D:代表非数字
+
+			*/
+			let str = "****2015年---08月---25日----";
+			let str2 = "/////2015年***08月***25日+++++";
+			let str3 = "######2015年+++08月+++25日￥￥￥￥";
+			//同一格式：XXXX年XX月XX日
+
+			//设置一个规则，同时找到所有字符串中的数字；
+			//规则：一堆非数字，一堆数字，一堆非数字，一堆数字，一堆非数字，一堆数字，一堆非数字
+			//找到所有的数字；意思就是将所有的数组分成组；
+			let re = /\D+(\d+)\D+(\d+)\D+(\d+)\D+/;
+			let newStr = str.replace(re,($0,$1,$2,$3)=>{
+				//console.log($0,$1,$2,$3);
+				return $1+"年"+$2+"月"+$3+"日";
+			});
+			console.log(newStr);
+		</script>
+	</body>
+</html>

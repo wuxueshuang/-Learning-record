@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box">
+			<!-- <span>姓名</span>
+			<span>年龄</span>
+			<span>性别</span> -->
+		</div>
+		<script>
+			let data = {
+				name:'leo',
+				age:30,
+				sex:"男"
+			}
+			let html = `<span>姓名:{{name}}</span>
+			<span>年龄:{{age}}</span>
+			<span>性别:{{sex}}</span>`;
+
+			function render(html,data){
+				let re = /\{\{(.+?)\}\}/g;
+				html = html.replace(re,($0,$1)=>{
+					console.log($0,$1);
+					return data[$1];
+									
+				});
+				return html;
+			}
+			render(html,data);
+			box.innerHTML = render(html,data);
+		</script>
+	</body>
+</html>

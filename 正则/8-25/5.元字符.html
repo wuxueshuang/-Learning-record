@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<script>
+		/*
+			\d:代表一个数字；
+			\D:代表一个非数字;
+			\s:代表一个空格;
+			\S：代表一个非空格;
+			\w:字母、数字、下划线;
+			\W:非数字、字母、下划线;
+			\b 单词边界
+			\B 非单词边界
+				一个\w的左边或右边不是一个\w就有一个边界符
+			. 任意字符 除了换行符 \n
+
+			匹配 . [] {} () \ 使用转移符 \ 消除原有的意义
+		*/
+
+
+
+
+
+		//封装一个方法，取出字符串前后空格;
+		/*function trim(str){
+			let re = /^\s+|\s+$/g//取出前面一个或多个空格;去除后面一个或多个空格
+			return str.replace(re,"");
+		}
+		let str = "   8999io    998*   ";
+		//console.log(trim(str));*/
+		// let str2 = 'gjy970g_()*%^&$#@[]l;';
+		// let re = /\W/g;
+		// console.log(str2.match(re));
+		// console.log(str.replace(re,"*"));
+
+		/*let str = 'I am miaov ke tang45#';
+		let re = /\b/g;
+		console.log(str.replace(re,"|"));*/
+
+		let str = 'abc.1(ketang)2\\3';
+		let re = /\.|\(|\)|\\/g;
+		console.log(str.replace(re,"@"));
+	</script>
+		
+	</body>
+</html>

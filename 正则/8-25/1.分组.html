@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*let str = "2015年---08月---25日";
+			let str2 = "2015年***08月***25日";
+			let str3 = "2015年+++08月+++25日";
+			let re = /(\d+)\D+(\d+)\D+(\d+)\D+/g;
+			str.replace(re,(...data)=>{
+				console.log(data);
+			});*/
+
+			/*let newStr = str.replace(re,($0,$1,$2,$3)=>{
+				return $1+'年'+$2+'月'+$3+'日';
+			});
+			console.log(newStr);*/
+			/*let str4 = "    miaov   4    ";
+			let re2 = /^\s+|$\s+/;
+			console.log(str4.replace(re2,""));*/
+
+			let str = "*-78**$%%^*)())(+_)##@2#%&（）+,'[]\n.";
+			let re = /./g;
+			console.log(str.replace(re,"*"));
+		</script>
+	</body>
+</html>

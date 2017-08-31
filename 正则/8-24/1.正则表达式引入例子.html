@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			let str = "hiufj48fg58f6585dgtkh898";
+			//需求：把所有的数字提取出来放到数组中；
+			let arr = [];
+			/*for( var i = 0; i < str.length; i++ ){
+				if(str.charAt(i)>=0&&str.charAt(i)<=9){
+					arr.push(str.charAt(i));
+				}
+			}
+			console.log(arr);	*/
+
+			for( var i = 0; i < str.length; i++ ){
+				if(!isNaN(str.charAt(i))){
+					arr.push(Number(str.charAt(i)));
+				}	
+			}
+			console.log(arr);
+			/*var temp = "";//声明一个临时变量存数字；
+			for( var i = 0; i < str.length; i++ ){
+				if(str.charAt(i)>=0&&str.charAt(i)<=9){//如果是数字会一直走if
+					temp += str.charAt(i);
+				}else{//不是数字走这里，证明一组连续的数字已经判断完成
+					if(temp){//如果temp中有数字，就将这个变量存的数字push到arr中
+						arr.push(temp);
+						temp = "";
+					}
+				}
+			}
+			if(temp){//str的最后一位是数字，就不会走到else里，所以for循环执行完成后，temp中还存有值，就将temp,push到数组中；
+				arr.push(temp);
+			}
+			console.log(arr);*/
+		</script>
+	</body>
+</html>

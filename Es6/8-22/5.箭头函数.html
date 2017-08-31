@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			let fn = (a,b) =>{//如果用大括号将代码体包起来，就需要手动添加函数的返回值，return；
+				console.log(123);
+				console.log(123);
+				console.log(123);
+				console.log(123);
+				return "我是返回值";
+			};
+			console.log(fn());
+
+			let add = (a,b) =>a+b;//箭头后面的是函数调用后的返回值；
+			console.log(add(5,6));
+
+			let func =(b,c)=>({a:5,});//返回值是对象要用小括号包起来；将对象作为一个整体；
+			console.log(func());
+
+			document.onclick = function(){
+				setTimeout(function(){//this指向的是调用函数的元素，定时器调用指向的是window
+					console.log(this);
+				},1000);
+				setTimeout(() =>{//箭头函数this指向的是定义时候的作用域中的this;
+					console.log(this);
+				},1000)
+			}
+		</script>
+	</body>
+</html>

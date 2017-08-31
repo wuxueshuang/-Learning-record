@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<input id = "message">
+	<span id = "tips"></span>
+		<script>
+			/*
+				转义符：
+					\t 制表符 缩进
+					\n 换行 
+
+			*/
+			/*var str = 'miaov\'ketang';
+			console.log(str);*/
+			alert("通知：\n \t今天不上课");
+			console.log("通知：\n \t今天不上课");
+			let re = /\d/;
+			message.oninput = function(){
+				if(re.test(this.value)){
+					tips.style.color = "blue";
+					tips.innerHTML = "输入了数字";
+				}else{
+					tips.style.color = "#000";
+					tips.innerHTML = "没输入数字";
+				}
+			}
+		</script>
+	</body>
+</html>

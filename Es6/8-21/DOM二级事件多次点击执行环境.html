@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				border-radius-topLeft:10px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div></div>
+		<input type = "button" value = "添加事件" id = "btn"/>
+		<input type = "button" value = "改变状态" id = "changeState"/>
+		<ul id = "list">
+			<li>123</li>
+		</ul>
+		<script>
+			btn.onclick = function(){
+				var state = true;
+				changeState.onclick = function(){
+					state = false;
+				}
+				li = list.querySelector("li");
+				if(li.isOn){
+					return;
+				}
+				li.isOn = true;
+				li.addEventListener("click",function(){
+					console.log(state);
+				});
+			}
+			/*	
+				第一次的时候：
+					创建一个执行环境:
+						点击btn，声明一个状态，state为true；给li和changeState添加事件处理函数；
+						需要注意的是li添加事件用的是addEventListner添加的，给changeState使用onclick添加的；
+						点击li的时候绑定的事件处理函数是console.log(state);
+						点击changeState绑定的是改变state的状态，state为false;
+						同时给li添加事件的时候做了一个过滤，li.isOn刚开始为underfined，添加上事件之后设置为true,如果li.isOn为true就不再绑定事件处
+						理函数；
+				第二次的时候：
+					又创建一个执行环境；
+						点击btn，声明一个状态，state为true；给li和changeState添加事件处理函数；
+						点击第一次的时候已经给li添加过事件处理函数，所以点击第二次的时候就不会在继续添加了；
+						但是给changeState使用onclick添加的；点击第二次的时候的处理函数会覆盖点击第一次时绑定的函数，所以，点击changeState一直改变的
+						点击最新的执行环境中的state；
+						点击li一直执行的是点击第一次时给li绑定的事件;
+				避免出现此类问题可以将控制状态的变量放在点击的外面：每次点击都可以访问到;
+			*/
+		</script>
+	</body>
+</html>

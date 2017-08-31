@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				1.为了保护变量把变量放在函数里，使用匿名函数自执行；
+				2.在其他文件中调用这个函数内容；把变量作为函数的返回值放在一个对象里return出去
+				3.声明一个变量来接收函数的返回值；
+			*/
+
+			let t = (function(){
+				function on(){
+					console.log("on")
+				}
+				function off(){
+
+				}
+				function add(){
+					console.log('add');
+				}
+				return {
+					on:on,
+					add:add,
+					off:off,
+				}
+			})();
+			//每次调用的时候必须写上t. ;每次这样写比较繁琐；
+			/*  t.on();
+				t.add();
+				t.off();
+			*/
+			//可以把函数的返回值；存在变量里；
+				/*let on = t.on;
+				on();*/
+			//解构赋值：
+			let {add,on,off} = t;
+			add();
+		</script>
+	</body>
+</html>

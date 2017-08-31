@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<ul id = "list">
+			<li>123</li>
+			<li>123</li>
+			<li>123</li>
+			<li>123</li>
+			<li>123</li>	
+		</ul>
+		<script>
+			var lis = list.querySelectorAll("li");
+			//for循环中使用var声明变量i;每次点击都是最终值；
+			/*for( var i = 0; i < lis.length; i++ ){
+				lis[i].onclick = function(){
+					console.log(i);
+				}
+			}*/
+
+			//添加自定义属性
+			/*for( var i = 0; i < lis.length; i++ ){
+				lis[i].index = i;
+				lis[i].onclick = function(){
+					console.log(this.index);
+				}
+			}*/
+
+			//匿名函数自执行
+			/*for( var i = 0; i < lis.length; i++ ){
+				
+				(function(i){
+					lis[i].onclick = function(){
+						console.log(i);
+					}
+				})(i);
+			}*/
+
+
+			//使用let声明变量，每次生成新的i,初始值是上次的结果；
+			/*for( let i = 0; i < lis.length; i++ ){
+				lis[i].onclick = function(){
+					console.log(i);
+				}
+			}*/
+			
+		</script>
+	</body>
+</html>

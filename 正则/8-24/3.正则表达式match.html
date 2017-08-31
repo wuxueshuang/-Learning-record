@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				限定符：
+					限定字符出现的次数
+					系统定义的：
+						+：至少出现一次，最多不限；
+						*:出现0次到多次
+						?:至少出现0次最多出现1次；
+						
+					自己定义出现的次数：
+						n，m都是数字；
+						{n}重复n次
+						{n，}至少重复n次
+						{n，m}至少重复n次,最多m次
+			*/
+			let arr = [1,2,3];
+			arr.index = 1000;
+			console.log(arr.index);
+			console.log(arr['index']);
+
+
+			let str = "miao12vke125tang589";
+			let re = /\d+/g;
+			console.log(str.match(re));
+
+			let str2 = "a2b5c89996a4566bcb789abc";
+			//规则a和c之间有一个数字：
+			let re2= /a\db/g;
+			console.log(str2.match(re2));
+
+			//规则a和c之间至少有一个数字：
+			let re3= /a\d+b/g;
+			console.log(str2.match(re3));
+
+			//规则a和c之间至0个或多个数字：
+			let re4= /a\d*b/g;
+			console.log(str2.match(re4));
+
+
+			//规则a和c之间至0个或1个数字：
+			let re5= /a\d?b/g;
+			console.log(str2.match(re5));
+		</script>
+	</body>
+</html>

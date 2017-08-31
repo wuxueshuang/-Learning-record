@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				():
+					在正则表达式中，称之为子项或者子项表达式；
+					如果正则中有分组，在match中表现：
+						正则中有g，全局匹配，不捕获分组信息；
+						正则中没有g,局部匹配，即匹配到一项立即结束，捕获分组信息；
+			*/
+
+			let str = "a2ca5c";
+			let re = /a(\d)c/g;//规则，以a开头，c结束，中间有一个数字,全局匹配
+			console.log(str.match(re));//["a2c", "2", index: 0, input: "a2ca5c"]//全局匹配，不捕获分组信息；
+			let re2 = /a(\d)c/;//规则，以a开头，c结束，中间有一个数字
+			console.log(str.match(re2));// ["a2c", "2", index: 0, input: "a2ca5c"]//匹配到一项立即结束，捕获分组信息；
+			
+			str.replace(re,(...$0)=>{
+				console.log($0);
+			})
+			
+			let id = "#btn";
+			let reId = /^#(\w)/;
+			let newStr = id.replace(reId,($0,$1)=>{
+				return $1;
+			});
+			console.log(newStr);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*var a = 10;
+			var obj = {
+				a:1,
+				fn:function(){
+					console.log(this.a);
+				},
+			}
+			obj.fn();//fn是一个函数，函数的this指向是调用时的元素。所以是obj;this.a就是obj.a:1;
+			var f = obj.fn;//把属性对应的函数赋值给了变量f，调用f就是直接调用，f中函数指向widown
+			f();*/
+
+			var a = 10;
+			var obj = {
+				a:1,
+				fn:()=>{
+					console.log(this.a);// 箭头函数拥有包含这个箭头函数的作用的this,obj这个对象的this指向的是window，
+					//所以箭头函数的this也指向window；
+				}
+			}
+			obj.fn();
+			var f = obj.fn;
+			f();
+		</script>
+	</body>
+</html>

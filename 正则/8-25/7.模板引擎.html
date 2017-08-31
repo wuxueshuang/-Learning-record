@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box">
+			<!-- <h2>title</h2>
+			<ul>
+				<li>123</li>
+				<li>123</li>
+				<li>123</li>
+			</ul> -->
+		</div>
+		<script src="./template-web.js"></script>
+		<script>
+			/*
+				模板引擎：
+					数据和模板结合在一起
+
+
+			*/
+			let html = `<h2>{{title}}</h2>
+			<ul>
+				{{each list}}
+				<li>{{$value}}</li>
+				{{/each}}
+			</ul>`;
+			let data = {
+				title:"人物列表",
+				list:['leo','momo','duoduo']
+			}
+			let Html = template.render(html,data);
+			box.innerHTML = Html;
+		</script>
+	</body>
+</html>

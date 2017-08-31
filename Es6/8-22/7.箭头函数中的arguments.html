@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*let fn = () =>{
+				console.log(arguments);//报错，箭头函数中没有arguments
+			}
+			fn();
+			fn(1,2,3,4,5,6,8);*/
+			let fn = (...arr) =>{
+				console.log(arr);
+			}
+			fn();
+			fn(1,2,3,4,5,6,8);
+
+		</script>
+	</body>
+</html>
