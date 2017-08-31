@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>for循环作业</title>
+<style>
+	.wrap{
+		width:500px;
+		height:600px;
+		margin:50px auto;
+		background:url(images/bg.png) no-repeat;
+		position:relative;
+		}
+	#box{
+		width:290px;
+		height:490px;
+		position:absolute;
+		top:55px;
+		left:107px;
+		border-radius:5px;
+		background:url(images/bg1.png) no-repeat;
+		}
+	#btn{
+		width:117px;
+		height:39px;
+		background:#5ab1fd;
+		line-height:37px;
+		border-radius:2px;
+		text-align:center;
+		color:#fff;
+		font-size:16px;
+		position:absolute;
+		left:87px;
+		bottom:29px;
+		}
+	#down{
+		width:250px;
+		height:150px;
+		position:absolute;
+		top:170px;
+		left:17px;
+		}
+	#up{
+		width:250px;
+		height:150px;
+		position:absolute;
+		top:70px;
+		left:17px;
+		}
+	#leftT{
+		width:150px;
+		height:250px;
+		position:absolute;
+		top:70px;
+		left:17px;
+		}
+	#rightT{
+		width:150px;
+		height:250px;
+		position:absolute;
+		top:70px;
+		right:17px;
+		}
+	#demo{
+		width:50px;
+		height:50px;
+		line-height:50px;
+		text-align:center;
+		font-size:30px;
+		font-weight:bold;
+		background:#fff;
+		border-radius:2px;
+		position:absolute;
+		}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+	<div id="box">
+    	<div id="down">
+        	<!--<div id="demo">1</div>-->
+        </div>
+        <div id="up">
+        	<!--<div id="demo">1</div>-->
+        </div>
+        <div id="leftT">
+        	<!--<div id="demo">1</div>-->
+        </div>
+        <div id="rightT">
+        	<!--<div id="demo">1</div>-->
+        </div>
+        <input type="button" id="btn" value="生成"/>
+    </div>
+</div>
+<script>
+	var box = document.getElementById('box');
+	var down = document.getElementById('down');
+	var up = document.getElementById('up');
+	var leftT = document.getElementById('leftT');
+	var rightT = document.getElementById('rightT');
+	var demo = document.getElementById('demo');
+	var btn = document.getElementById('btn');
+	var topheight="";
+	var leftwidth="";
+	var rightwidth="";
+	var state = down;
+	//var n = 0;
+	/*btn.onclick = function(){
+		for(var i = 0;i<5;i++){
+			//down.innerHTML += '<div id="demo">'+(i+1)+'</div>';//在down中生成5个小的div;
+			//left值：left:i*50px;
+			//top值：当i <2的时候：top:(2-i)*50px;
+					//当i >2的时候：top:(i-2)*50px;
+			if(i<=2){
+				topheight=(2-i)*50;
+				//console.log(topheight);
+			}else{
+				topheight=(i-2)*50;
+			}
+			leftwidth = i*50;
+			down.innerHTML += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+			}		
+	}	*/
+	/*btn.onclick = function(){
+		for(var i = 0;i<5;i++){
+			if(i<=2){
+				leftwidth=(2-i)*50;
+			}else{
+				leftwidth=(i-2)*50;
+			}
+			topheight=i*50;
+			rightT.innerHTML += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	}	*/
+	/*btn.onclick = function(){
+		for(var i = 0;i<5;i++){
+			if(i<=2){
+				topheight=i*50;
+			}else{
+				topheight=(4-i)*50;
+			}
+			leftwidth = i*50;
+			up.innerHTML += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	}*/
+	/*btn.onclick = function(){
+		for(var i = 0;i<5;i++){
+			if(i<=2){
+				leftwidth=i*50;
+			}else{
+				leftwidth=(i%2)*50;
+			}			
+			topheight=i*50;
+			leftT.innerHTML += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	}*/
+	var str1 = "";
+	for(var i = 0;i<5;i++){
+			//down.innerHTML += '<div id="demo">'+(i+1)+'</div>';//在down中生成5个小的div;
+			//left值：left:i*50px;
+			//top值：当i <2的时候：top:(2-i)*50px;
+					//当i >2的时候：top:(i-2)*50px;
+			if(i<=2){
+				topheight=(2-i)*50;
+				//console.log(topheight);
+			}else{
+				topheight=(i-2)*50;
+			}
+			leftwidth = i*50;
+			str1 += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	var str2 = "";
+	for(var i = 0;i<5;i++){
+			if(i<=2){
+				leftwidth=(2-i)*50;
+			}else{
+				leftwidth=(i-2)*50;
+			}
+			topheight=i*50;
+			str2 += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+	}
+	var str3 = "";
+	for(var i = 0;i<5;i++){
+			if(i<=2){
+				topheight=i*50;
+			}else{
+				topheight=(4-i)*50;
+			}
+			leftwidth = i*50;
+			str3 += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	var str4 = "";
+	for(var i = 0;i<5;i++){
+			if(i<=2){
+				leftwidth=i*50;
+			}else{
+				leftwidth=(i%2)*50;
+			}			
+			topheight=i*50;
+			str4 += '<div id="demo" style="left:'+leftwidth+'px;top:'+topheight+'px;">'+(i+1)+'</div>';
+		}
+	var str = [str1,str2,str3,str4];
+	var n = 0;
+	btn.onclick = function(){
+		if(n>3){
+			n=0;
+		}else{
+			box.innerHTML=str[n];
+			n++;
+		}
+	}
+</script>
+</body>
+</html>
