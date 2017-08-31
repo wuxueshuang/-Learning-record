@@ -1,0 +1,32 @@
+##this指向
+*	函数被调用的几种情况，this分别指向什么值
+
+**1.直接调用 this => window**
+
+	function fn(){
+		console.log(this);
+	}
+
+	fn();//window
+
+**2.事件调用 this => 触发事件的元素**
+	
+	function fn(){
+		console.log(this);
+	}
+	
+	document.onclick = fn;//#document
+
+**3.定时器调用 this => window**
+	
+	setInterval(function(){
+		console.log(this);//window
+	},1000);
+
+**4.箭头函数被调用 this => 所定义的作用域的this**
+
+**5.new 调用函数（面向对象）this => 内部创建的隐式对象**
+
+**6.对象调用函数 => 调用函数的对象**
+
+	函数作为window内置函数的回调函数调用时：this->window
