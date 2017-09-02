@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				订阅发布模式
+					订阅者
+					发布者
+					事件
+			*/
+		</script>
+	</head>
+
+	<body>
+		<script>
+			//定义一个类，用来描述一组具有相同特性的属性和方法的对象
+			class Sales {
+				constructor (){
+					this.telephoneBook = [];//记录每个订阅者
+				}
+				//订阅方法：
+				order(telephone){//将手机号码存到telephoneBook里
+					this.telephoneBook.push(telephone);
+				}
+				//发布的方法：有房子的时候通知;
+				publish(){
+					for( var i = 0; i < this.telephoneBook.length; i++ ){
+						this.telephoneBook[i]();//this.telephoneBook里存的是函数，执行每一个函数就可以了
+					}
+				}
+				remove(telephone){
+					for( var i = 0; i < this.telephoneBook.length; i++ ){
+						if(this.telephoneBook[i]==telephone){
+							this.telephoneBook.splice(i,1);
+							break;
+						}
+					}
+				};
+			}
+
+			//通过类得到具体的实例；
+			let office = new Sales();
+
+			//alice,有没有房子，有房子通知我；
+
+			function fn(){
+				console.log("有房子通知alice");
+			}
+			office.order(fn);
+			office.order(function(){
+				console.log("有房子通知john");
+			});
+
+			//某一时刻不再订阅这个售楼中心的通知;
+			office.remove(fn);
+			document.onclick = function(){
+				//某一天有房子了，通知大家；发布事件
+				office.publish();
+		}
+		</script>
+	</body>
+</html>

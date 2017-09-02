@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 300px;
+			}
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box1"></div>
+		<script>
+			//做拖拽的父类
+			class Drag{
+				constructor(dragBox){
+					this.dragBox = dragBox;
+				}
+				dragInit(){
+					this.dragBox.onmousedown = this.downFn.bind(this);
+				}
+				downFn(ev){
+					this.disX = ev.clientX - this.dragBox.offsetLeft;
+					this.disY = ev.clientY - this.dragBox.offsetTop;
+					document.onmousemove = this.moveFn.bind(this);
+					document.onmouseup = this.upFn.bind(this);
+				}
+				//定义一个做限制的函数
+				limitStyle(){
+
+				}
+				moveFn(ev){
+					this.left = ev.clientX - this.disX;
+					this.top = ev.clientY - this.disY;
+					this.limitStyle();//执行这个限制的函数;
+					this.dragBox.style.left = this.left + "px";
+					this.dragBox.style.top = this.top + "px";
+				}
+				upFn(){
+					document.onmousemove = document.onmouseup = null; 
+				}
+			}
+			let box = document.getElementById("box1");
+			//根据父类生成一个可以拖拽的实例;
+			//给这个实例托拽的时候做一个限制;top = top < 0 ? 0 : top;
+			/*方法一：
+			再定义个类，用来做限制；这个类继承了Drag的所有方法和属性；
+			class LimitDrag extends Drag{
+				constructor(dragBox){
+					super(dragBox);
+				}
+				//改写父类的方法;
+				moveFn(ev){
+					this.left = ev.clientX - this.disX;
+					this.top = ev.clientY - this.disY;
+					if(this.left < 0){
+						this.left = 0;
+					}
+
+					if(this.top < 0){
+						this.top = 0;
+					}
+					this.dragBox.style.left = this.left + "px";
+					this.dragBox.style.top = this.top + "px";
+				}
+			}*/
+			/*方法二：
+				再定义个类，用来做限制；这个类继承了Drag的所有方法和属性；
+
+			*/
+			class LimitDrag extends Drag{
+				constructor(dragBox){
+					super(dragBox);
+				}
+				limitStyle(){
+					if(this.left < 0){
+						this.left = 0;
+					}
+
+					if(this.top < 0){
+						this.top = 0;
+					}
+				}
+			}
+			let b = new LimitDrag(box1);
+			b.dragInit();
+		</script>
+	</body>
+</html>

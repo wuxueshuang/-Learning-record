@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 300px;
+			}
+			#box2 {
+				width: 100px;
+				height: 100px;
+				background: yellow;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#box3 {
+				width: 500px;
+				height: 30px;
+				border: 1px solid #000;
+				position: relative;
+				margin-top: 120px;
+			}
+			#bar {
+				width: 30px;
+				height: 100%;
+				background: blue;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<div id="box3">
+			<div id="bar"></div>
+		</div>
+		<script src = "./cutom.js"></script>
+		<script>
+			// 做拖拽的基类
+
+			// 在类中不能做某一个拖拽固定的事情，因为有些拖拽不行需要
+			// 谁需要干啥权力交给外边去做，在类中不做
+			class Drag extends CustomEvents{
+				constructor(dragBox){
+					super();
+					this.dragBox = dragBox;
+				}
+				dragInit(){
+					this.dragBox.onmousedown = this.downFn.bind(this);
+				}
+				downFn(ev){
+					this.publish("mousedown");//down下去做的事情
+					this.disX = ev.clientX - this.dragBox.offsetLeft;
+					this.disY = ev.clientY - this.dragBox.offsetTop;
+					document.onmousemove = this.moveFn.bind(this);
+					document.onmouseup = this.upFn.bind(this);
+				}
+				moveFn(ev){
+					this.publish("mousemove");//move时候做的事情
+					this.left = ev.clientX - this.disX;
+					this.top = ev.clientY - this.disY;
+					this.dragBox.style.left = this.left + "px";
+					this.dragBox.style.top = this.top + "px";
+				}
+				upFn(){
+					this.publish("mouseup");
+					document.onmousemove = document.onmouseup = null; 
+				}
+			}
+			let box = document.getElementById("box1");
+			let box2 = document.getElementById("box2");
+			//根据父类生成一个可以拖拽的实例;
+			// 拖拽box1的时候记录拖拽过程的状态
+			// 拖拽box2的时候不记录拖拽过程的状态
+			
+			let b = new Drag(box1);
+			
+			b.dragInit();
+			b.order('mousedown',function (){
+				console.log("down");		
+			});
+
+			b.order('mousemove',function (){
+				console.log("move");		
+			});
+			b.order('mouseup',function (){
+				console.log("up");		
+			});
+
+			/*b.order('mousemove',function(){
+				b.top = 0;
+				if(b.left < 0){
+					b.left = 0;
+				}	
+			});*/
+			let b2 = new Drag(box2);
+			b2.dragInit();
+			/*b2.order('mousedown',function (){
+			});
+
+			b2.order('mousemove',function (){
+			});
+			b2.order('mouseup',function (){					
+			});*/
+		</script>
+	</body>
+</html>

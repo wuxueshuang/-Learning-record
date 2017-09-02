@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+			<script>
+				let obj1 = {
+					a:1,
+					list:{
+						price:10
+					}
+				};
+				/*let obj2 = {};
+				for(let attr in obj1){
+					obj2[attr] = obj1[attr];
+				}
+				obj2.list.add = 100;
+				console.log(obj2,obj1);*/
+				/*let obj2 = {};
+				for(let attr in obj1){
+					if(typeof obj1[attr] ===　"object"){
+						let cloneObj = {};
+						for(let attr1 in obj1[attr]){
+							cloneObj[attr1] = obj1[attr][attr1];
+						}
+						obj2[attr] = cloneObj;
+					}else{
+						obj2[attr] = obj1[attr];
+					}
+				}
+				obj2.list.add = 100;
+				console.log(obj2,obj1);*/
+
+
+
+				//深复制：
+				function deepClone(obj){
+					let newObj = obj instanceof Array ? [] : {};//判断传进来的obj是数组还是对象
+					for(let attr in obj){
+						//如果obj[attr]是一个对象，不能直接复制，否则就是浅复制，改变一个对象的内容，另一个也会跟着改变;需要把这个对象在复制一份，即深复制
+						if(typeof obj[attr] === "object" &&  obj[attr] !== null){//判断这个属性对应得值是一个引用类型的，并且不为null；
+							//console.log(obj[attr]);
+							newObj[attr] = deepClone(obj[attr]);
+						}else{
+							newObj[attr] = obj[attr];
+						}						
+					}
+					return newObj;
+				}
+				/*let newObj = deepClone (obj1);
+				console.log(newObj);
+				newObj.list.add = 100;
+				console.log(newObj,obj1);*/
+
+				let arr1 = {
+					a:0,
+					list:[1,2,3,4]
+				}
+				let obj2 = deepClone (arr1);
+				console.log(obj2);
+				obj2.list.push = 100;
+				console.log(obj2,arr1);
+
+			</script>
+	</body>
+</html>

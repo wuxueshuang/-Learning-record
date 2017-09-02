@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				订阅发布模式
+					订阅者
+					发布者
+					事件
+			*/
+		</script>
+	</head>
+
+	<body>
+		<script>
+			//定义一个类，用来描述一组具有相同特性的属性和方法的对象
+			class Sales {
+				constructor (){
+					this.telephoneBook = {};//记录每个订阅者,订阅的平米数，电话号码
+				}
+				//订阅方法：
+				order(area,telephone){
+					if(!this.telephoneBook[area]){
+						this.telephoneBook[area] = [];
+					}//将手机号码存到telephoneBook里
+					this.telephoneBook[area].push(telephone);
+				}
+				//发布的方法：有房子的时候通知;此时存放的通知，是有目的性的，也就是不同的目的对应不同的事件；
+				publish(areaName){//具体到了房子的大小
+					let arr = this.telephoneBook[areaName];//将订阅这个大小的房子的人通知了，也就是执行订阅里记录的函数；
+					for( var i = 0; i < arr.length; i++ ){
+						arr[i]();//this.telephoneBook里存的是函数，执行每一个函数就可以了
+					}
+				}
+				//取消订阅方法：
+				remove(telephone){
+					for( var i = 0; i < this.telephoneBook.length; i++ ){
+						if(this.telephoneBook[i]==telephone){
+							this.telephoneBook.splice(i,1);
+							break;
+						}
+					}
+				};
+			}
+
+			//通过类得到具体的实例；
+			let office = new Sales();
+
+			//alice,有没有100平的房子，有房子通知我；
+
+			function fn(){
+				console.log("有房子通知alice");
+			}
+			office.order("100",fn);
+			office.order("200",function(){
+				console.log("有房子通知john");
+			});
+
+			//某一时刻不再订阅这个售楼中心的通知;
+			office.remove(fn);
+			/*document.onclick = function(){
+				//某一天有房子了，通知大家；发布事件
+				office.publish("200");
+			}*/
+			document.addEventListener("mousedown",function(){
+				office.publish("200");
+			});
+			document.addEventListener("mouseup",function(){
+				office.publish("100");
+			});
+		</script>
+	</body>
+</html>

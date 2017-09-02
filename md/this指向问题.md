@@ -47,8 +47,22 @@
 	函数作为构造函数用new关键字调用时，this => new 出的对象（实例）
 
 **7.函数作为window内置函数的回调函数调用时：this->window**
-	
 
+	未详解
+		
+**8.call，apply调用，this指向第一个参数；**
+
+			//call就直接调用了这个函数，赋给onclick的是函数的返回值
+			document.onclick = function(){
+				console.log(this);
+				let fn = () => {
+					console.log(this);  //this => [1,2,3]
+				}
+				return fn;
+			}.call([1,2,3]);
+	
+			//也就是：
+			document.onclick  = fn;//打印出来的是[1,2,3];
 ##2.改变this指向
 
 ###方法一
