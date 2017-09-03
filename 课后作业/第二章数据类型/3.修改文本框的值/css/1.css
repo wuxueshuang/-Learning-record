@@ -1,0 +1,77 @@
+.wrap{
+	width:604px;
+	height:360px;
+	padding:60px 0 0 160px;
+	background:url(../images/bg.png);
+	margin:0 auto;
+}
+.box{
+	width:440px;
+	height:140px;
+	padding-top:100px;
+	border-radius: 5px;
+	background:url(../images/bg1.png);
+}
+.content,.content2{
+	margin-left:18px;
+	height:36px;	
+}
+.title{
+	height:36px;	
+}
+.title span{
+	float:left;
+	color:blue;
+	height:36px;
+	line-height:36px;
+	line-height:36px;
+	font-size: 16px;
+	margin-right:22px;
+}
+
+.title button{
+	float:left;
+	height:24px;
+	width:24px;
+	border:0;
+	background-color:none;
+	margin-top:6px;
+	background:url(../images/c.png);
+}
+.edit{
+	height:36px;
+	display: none;	
+}
+.edit .message{
+	float:left;
+	height:34px;
+	width:254px;
+	border:1px solid #e15671;
+}
+.save,.quit{
+	float:left;
+	width:60px;
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	border:0;
+	background:none;
+	margin-left:10px;
+	border-radius: 2px;
+}
+.save{
+	background:#e15671;
+	color:#fff;
+}
+.quit{
+	background:#fff;
+	color:#e15671;
+	border:1px solid #e15671;
+}
+.xian{
+	width:440px;
+	height:0;
+	padding:0;
+	margin:26px 0 22px 0 ;
+	border-top:1px dashed #69585b;
+}
