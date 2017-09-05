@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<!--
+				form表达作用：
+					用来提交数据;
+				form表单中的input的name很关键，是前后端约定的字段;
+				不好的地方：提交数据会跳转页面;
+
+				action :要跳转的页面
+				method：提交方式：get 和 post
+					get 和 post在浏览器中的区别：
+						get:
+							1.发送数据的方式不同：
+								get的方式是在地址栏中问号?的后面，
+									key=value&key2=value2&key3=value3  称为queryString
+							2.浏览器对地址有限制：
+									所以get的数据会有限制，
+							3.安全性：
+								不安全，可以发送一些无关紧要的;
+								浏览器好缓存地址;
+
+						post:
+							1.发送数据的方式不同：
+								post放在HTTP请求的body(主体)发送的;
+							2.浏览器对地址有限制：
+									理论上没有限制;但在服务端有限制;
+							3.安全性：
+								相对安全
+		-->
+		<h2>注册post-ajax</h2><br/>
+		用户名：<input name = "username" id = "username"><span id = "tip"></span><br/>
+		密码:<input type = "password" name = "password"><br/>
+		<input type = "button" value = "提交" id = "send"><br/>
+		<script>
+			send.onclick = function(){
+				//发送请求：
+				//1.得到一个ajax对象
+				let  xhr = new XMLHttpRequest();
+				//2.连接地址，准备好数据	
+				xhr.open(
+					'POST',
+					'http://localhost:80/9-5/backend/php/post.php',
+					true
+				);			
+
+				//3.发送：
+				//设置一个请求头部：设置内容的类型：
+				xhr.setRequestHeader('content-Type',
+					'application/x-www-form-urlencoded'
+				);
+				xhr.send('user='+username.value);
+
+				
+				//考虑一下ajax怎么拿到响应信息的，
+				//什么时候ajax回来了？
+
+				//4.响应回来会触发onload事件
+				xhr.onload = function(){
+					console.log("我回来了");
+					//回来之后响应的内容
+					console.log(xhr.responseText);
+					tip.innerHTML = xhr.responseText;
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<!--
+				form表单作用：
+					用来提交数据;
+				form表单中的input的name很关键，是前后端约定的字段;
+				不好的地方：提交数据会跳转页面;
+
+				action :要跳转的页面
+				method：提交方式：get 和 post
+					get 和 post在浏览器中的区别：
+						get:
+							1.发送数据的方式不同：
+								get的方式是在地址栏中问号?的后面，
+									key=value&key2=value2&key3=value3  称为queryString
+							2.浏览器对地址有限制：
+									所以get的数据会有限制，
+							3.安全性：
+								不安全，可以发送一些无关紧要的;
+								浏览器好缓存地址;
+
+						post:
+							1.发送数据的方式不同：
+								post放在HTTP请求的body(主体)发送的;
+							2.浏览器对地址有限制：
+									理论上没有限制;但在服务端有限制;
+							3.安全性：
+								相对安全
+		-->
+		<h2>注册</h2><br/>
+		<form action = "" method = "get">
+			用户名：<input name = "user"><br/>
+			用户名：<input type = "password" name = "user"><br/>
+			<input type = "submit" value = "登录"><br/>
+		</form>
+	</body>
+</html>

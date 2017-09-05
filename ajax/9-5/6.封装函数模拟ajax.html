@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<h2>注册get-ajax</h2>
+		用户名：<input type="text" name="user" id="username" /><span id="tip"></span>
+		<br/>
+		邮箱：<input type="text" name="email" id="email" />
+		<br/>
+		密码：<input type="password" name="password" /><br/>
+		<input type="button" id="send" value="提交">
+		<script>
+			//封装函数模拟ajax请求
+			/*
+				//传入参数，需要讨论是：
+					1.提交的访问地址;
+					2.采用什么方式提交;
+					3.传入的数据;
+					4.访问后获取数据成功做的事情
+					5.访问后获取数据失败做的事情
+			*/
+			function ajax(options){
+				let defaults = Object.assign({
+					url:"",
+					method:"get",
+					data:"",
+					success(){},
+					error(){}
+				},options);
+				//访问地址不能为空；需要做判断，
+				if(defaults.url === ""){
+					//抛出错误
+					throw new Error("地址不能为空");
+				}
+
+				//1.得到一个ajax对象：
+				let xhr = new XMLHttpRequest();
+
+				//判断是get请求还是post请求
+				//get请求把data放在地址的后面，post方式要把数据data放在send的参数中，
+				if(defaults.method.toLowerCase()==="get"){
+					defaults.url = defaults.url + "?" + defaults.data;
+				}
+
+				// if(defaults.method.toLowerCase() === 'get'){
+				// 	defaults.url = defaults.url + '?'+defaults.data;
+				// }
+
+				//2.连接地址，准备好数据
+				xhr.open(
+					defaults.method,
+					defaults.url,
+					true
+				);				
+				//3.发送：
+				//需要判断是个体还是post方式：
+				if(defaults.method.toLowerCase()==="post"){
+					//设置一个请求头部：设置内容的类型：
+					xhr.setRequestHeader(
+						"content-Type",
+						'application/x-www-form-urlencoded'
+					);
+					xhr.send(defaults.data);
+				}else if(defaults.method.toLowerCase()==="get"){
+					xhr.send();
+				}
+
+				//4.数据全部接受后
+				xhr.onload = function(){
+					//判断一下是否成功
+					if(xhr.status === 200 || xhr.status === 304){
+						defaults.success(xhr.responseText);
+					}else if(xhr.status === 404){
+						defaults.error(xhr.status,xhr.statusText);
+					}
+				}
+				
+			}
+
+
+			//get方式：
+			username.onblur = function(){
+				ajax(
+				   {
+						url:"http://localhost/9-5/backend/php/get.php",
+						method:"get",
+						data:`user=${username.value}`,
+						success(data){
+							console.log(data);
+						},
+						error(status,statusText){
+							console.log(status,statusText);
+						}
+				  });
+			}
+
+
+			//post方式;
+			email.onblur = function(){
+				ajax(
+					{
+						url:"http://localhost:80/9-5/backend/php/post.php",
+						method:"post",
+						data:`user=${email.value}`,
+						success(data){
+							console.log(data);
+						},
+						error(status,statusText){
+							console.log(status,statusText);
+						}
+					}
+				);
+			}
+		</script>
+	</body>
+</html>
