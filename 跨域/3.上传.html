@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box{
+				width:500px;
+				height:30px;
+				background:#ccc;
+				position:relative;				
+			}
+			#show{
+				width:100%;
+				margin:0;
+				height:100%;
+				text-align:center;
+				color:yellow;
+				line-height:30px;
+				position:relative;
+				z-index:999;
+			}
+			#bar{
+				height:100%;
+				background:lime;
+				position:absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script>
+			/*
+				JS不能读取文件，只有服务器的语言才能读取文件;
+				eg:js.deleteFile("c");//如果可以读取文件就有可能通过这个方法将c盘删除，是有风险的;
+			*/
+		</script>
+	</head>
+
+	<body>
+		<input type = "file" name = "file" id = "upFile"/>
+		<input type = "button" value = "上传" id = "btn"/>
+		<div id = "box">
+			<p id = "show">0%</p>
+			<div id = "bar"></div>
+		</div>
+		<script>
+			/*
+				采用ajax写上传功能；
+				点击上传按钮触发事件：
+					1.获得一个ajax对象；
+					2.连接地址，准备好数据;
+					3.发送数据；
+						找到真正要长传的文件，把文件转成二进制的;
+							console.log("upFile.value");//打印出来的是文件的地址；
+							真正上传的资源，放在元素的files属性中;
+							console.log(upFiles.files[0]);
+					4.数据全部接收后判断一下状态；
+			*/
+			btn.onclick = function(){
+				let xhr = new XMLHttpRequest();
+				xhr.open(
+					"post", 
+					"http://localhost/9-5/backend/post_file.php", 
+					true
+				);
+				
+				//监控上传进度
+				
+				xhr.upload.onprogress = function(ev){
+					//ev.loaded上传大小
+					//ev.total总大小
+					let scale = Math.round(ev.loaded/ev.total * 100) + "%";
+					show.innerHTML = scale;
+					bar.style.width = ev.loaded/ev.total * 500 + "px";
+
+				}
+				xhr.onload = function(){
+					console.log(xhr.responseText);
+				}
+
+				//找到要上传的文件；
+				let f = new FormData();
+				f.append('file',upFile.files[0]);
+
+				xhr.send(f);
+			}
+		</script>
+	</body>
+</html>

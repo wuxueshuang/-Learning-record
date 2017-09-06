@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				所谓同源是指：域名，协议，端口相同;
+
+				域名：(ip的别名)
+					一级域名：
+						baidu.com taobao.com gome.com.cn
+					二级域名：
+						news.baidu.com 
+						一级域名和二级域名不是同一个域名;
+
+
+
+				协议：服务器（客户端）进行通信的约定;
+					http 
+					https
+					ftp 
+					file
+
+				端口：
+					https    默认的是443端口;
+					http     默认的是80端口;
+					ftp              22
+					file             
+				这三个有一个不同，就产生跨域。
+			*/
+
+
+			//http://localhost/backend/get_sae.php
+		</script>
+	</head>
+
+	<body>
+		<input type="button" value="获取数据" id="btn" />
+		
+			
+		<!--
+			http://localhost:8888/test
+		-->
+		<script>
+			btn.onclick = function (){
+				let xhr = new XMLHttpRequest();	
+				xhr.open(
+					'get',
+					'http://localhost:80/backend/get_sae.php/?'+Math.random(),
+					true
+				)
+
+				xhr.onload = function (){
+					console.log(xhr.responseText);	
+				};
+
+				xhr.send();
+			};
+		</script>
+	</body>
+</html>

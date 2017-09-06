@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				json是一个字符串
+
+				JOSN字符串的两种格式：
+					1.名/值：'{
+							"key1":"value1",
+							"key2":"value2"
+						}'
+						key值必须写双引号、值是任意类型、不能是函数，如果后台接收到的是一个函数，函数会执行，这可能影响后台的数据；
+					2.值得有序列表：'[]';
+						'["value1","value2","value3"]'
+						值不能是函数
+
+				JOSN字符串 -> 可用的对象;
+			*/
+		</script>
+	</head>
+
+	<body>
+	<script>
+		//JSON是字符串
+		let json = '{"username":"leo","age":30}';
+		//需要将json字符串转成可操作的对象； 
+		//json->对象
+
+		//JSON 全局的对象，专门用来处理JSON数据格式的
+
+
+		let obj = JSON.parse(json);
+		console.log(obj);
+
+		//要向后端发送数据
+		let obj2  = {username:"leo",age:20};
+
+
+		//把对象转成json字符串；
+		let str = JSON.stringify(obj2);
+		console.log(str);
+
+	</script>
+	</body>
+</html>

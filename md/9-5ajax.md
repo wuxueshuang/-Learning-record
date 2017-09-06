@@ -216,7 +216,7 @@
 > 
 >    *   text/plain 文本
 >
->    *      二进制 
+>    *   multipart/form-data 编码为二进制的，上传文件时可用 
 >      
 在**ajax**中：
 没有默认值，需要在发送请求的前面自己设置一下enctype；
@@ -245,6 +245,95 @@
 > 	</form>
 
 
+
+
+> **ajax**上传：
+
+> <input type = "file" name = "file" id = "upFile"/>
+		<input type = "button" value = "上传" id = "btn"/>
+		<div id = "box">
+			<p id = "show">0%</p>
+			<div id = "bar"></div>
+		</div>
+
+
+> 		<script>
+			/*
+				采用ajax写上传功能；
+				点击上传按钮触发事件：
+					1.获得一个ajax对象；
+					2.连接地址，准备好数据;
+					3.发送数据；
+						找到真正要长传的文件，把文件转成二进制的;
+							console.log("upFile.value");//打印出来的是文件的地址；
+							真正上传的资源，放在元素的files属性中;
+							console.log(upFiles.files[0]);
+					4.数据全部接收后判断一下状态；
+			*/
+			btn.onclick = function(){
+				let xhr = new XMLHttpRequest();
+				xhr.open(
+					"post", 
+					"http://localhost/9-5/backend/post_file.php", 
+					true
+				);
+				
+
+
+> 				//监控上传进度				
+				xhr.upload.onprogress = function(ev){
+					//ev.loaded上传大小
+					//ev.total总大小
+					let scale = Math.round(ev.loaded/ev.total * 100) + "%";
+					show.innerHTML = scale;
+					bar.style.width = ev.loaded/ev.total * 500 + "px";
+				}
+				xhr.onload = function(){
+					console.log(xhr.responseText);
+				}
+				//找到要上传的文件；
+				let f = new FormData();
+				f.append('file',upFile.files[0]);
+> 
+> 			/*
+>              append 中的参数：
+>              name value
+>              name:input表单控件中对应的name,和后台约定好的；
+>              value： 传送的文件的内容
+> 			*/
+				xhr.send(f);
+			}
+		</script>
+
+
+##FormData 对象的使用
+> 通过FormData对象可以组装一组用 XMLHttpRequest发送请求的键/值对。它可以更灵活方便的发送
+> 
+> 表单数据，因为可以独立于表单使用。如果你把表单的编码类型设置为multipart/form-data ，则
+> 
+> 通过FormData传输的数据格式和表单通过submit() 方法传输的数据格式相同
+>
+>**创建一个FormData对象**
+>
+>     let formData = new FormData();
+
+> **FormData对象的使用**
+> 
+>     // HTML 文件类型input，由用户选择
+       let f = new FormData();
+	   f.append('file',upFile.files[0]);
+
+> 
+>append 中的参数：
+>
+>name value
+>
+>name:input表单控件中对应的name,和后台约定好的；
+>
+>value： 传送的文件的内容
+> 		
+> 通过调用它的append()方法添加字段
+
 ##ajax中的状态码(status);
 
 > **xhr.status:**
@@ -261,6 +350,9 @@
 
 ##ajax工作流程
 ----------------------
+
+>阶段   xhr.readystate
+>
 > 初始化，未发送			0	UNSENT
 > 
 > 准备数据，连接地址		1	OPENED
@@ -321,7 +413,7 @@
 					true
 				);				
 				//3.发送：
-				//需要判断是个体还是post方式：
+				//需要判断是get还是post方式：
 				if(defaults.method.toLowerCase()==="post"){
 					//设置一个请求头部：设置内容的类型：
 					xhr.setRequestHeader(
