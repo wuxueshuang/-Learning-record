@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input class="new-todo" placeholder="请输入内容" value="">
+            </header>
+            <section class="main" >
+                <input class="toggle-all" type="checkbox" disabled = "" style = "display:none">
+                <ul class="todo-list">
+                    <!--<li class="completed">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" checked="">
+                            <label>多多对对对</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="多多对对对">
+                    </li>-->
+                </ul>
+            </section>
+            <footer class="footer" style = "display: none">
+	            <span class="todo-count">
+	            	<strong>0</strong>
+	            	<span>条未选中</span>
+	            </span>
+            </footer>
+        </div>
+    </section>
+    <script>
+        /*
+            需求：
+                1.输入内容按下enter键中间列表出现，下方操作显示内容出现
+
+        */
+        //------------------------操作数据的方法--------------------------
+            //通过指定id，删除对应的数据；
+            function deleteDataById(id,obj){
+                for(var attr in obj){
+                    if(attr == id){
+                        console.log(obj[attr]);
+                        delete  obj[attr];
+                    }
+                }
+                return obj;
+            }
+
+            //通过指定元素和属性修改数据中对应的内容
+            function changeDataByIdProp(obj,ele,prop){
+                console.log(ele[prop]);            
+                console.log(obj[ele.dataset.id][prop]);
+                if(ele[prop] == true){//如果元素身上的这个属性为true
+                    //根据这个元素身上的id，修改对应数据中的这个属性
+                    obj[ele.dataset.id][prop] = true;
+                    ele.parentNode.parentNode.classList.add("completed"); //选中的时候字体为灰色，带有删除线;是通过父级的父级li的class名控制的。li添加class名，即选中的时候字体为灰色，带有删除线;             
+                }else{
+                     obj[ele.dataset.id][prop] = false;
+                     ele.parentNode.parentNode.classList.remove("completed");//li移出class名;
+                }
+            }
+
+            //通过id和val更改数据对应id的val；
+            function changeDataByIdVal(data,val,id){
+                for(var attr in data){
+                    if(attr == id){
+                        data[attr]["messageVal"] = val;
+                    }
+                }
+                return data;
+            }
+
+        //------------------------判断类方法------------------------------
+            
+            //获得未选中的数量
+            function whoSelect(arr,prop){
+                let n = 0;
+                for( var i = 0; i < arr.length; i++ ){
+                    if(arr[i][prop]){
+                        n++;
+                    }
+                }
+                return n;   
+            }
+
+
+            //找到obj数据中checked不被选中的总个数
+            function calculation (obj){
+                let count = 0;
+                for(var attr in obj){ 
+                    //console.log(Boolean(obj[attr]["checked"]));               
+                    if(!Boolean(obj[attr]["checked"])){
+                        count++;
+                    }
+                }
+                return count;
+            }
+
+        
+            //判断全选按钮是否被勾选
+            function  sureCheckAll(target){            
+                if(whoSelect(checkedI,"checked")==checkedI.length){
+                    toggleAll.checked = true;
+                }else{
+                    toggleAll.checked = false;
+                }
+            }
+
+            //判断全选按钮是否可点(应该是是否显示);
+            function toggleAllIsClick (){
+                if(checkedI.length == 0){
+                    //toggleAll.checked = false;
+                    /*toggleAll.removeAttribute("checked");
+                    toggleAll.disabled = true;//全选按钮不可点;*/
+                    toggleAll.style.display = "none";
+                    footer.style.display = "none";//下方操作按钮指示部分；
+                    console.log("我执行了");
+                   
+                }else{
+                    toggleAll.style.display = "block";
+                    footer.style.display = "block";//下方操作按钮指示部分；
+                    toggleAll.disabled = false;                
+                }   
+            } 
+
+        let newTodo = document.getElementsByClassName("new-todo")[0];//新建的消息框
+        let toggleAll = document.getElementsByClassName("toggle-all")[0];//全选按钮；
+        let todoList = document.getElementsByClassName("todo-list")[0];//显示消息条的内容部分；
+        let footer = document.getElementsByClassName("footer")[0];//下方操作部分；
+        let checkedI = todoList.getElementsByClassName("toggle");//所有的单选按钮
+        let todoCount = document.getElementsByClassName("todo-count")[0];//计算信息条数的大块
+        let count = todoCount.querySelector("strong");//显示未被选中的个数的strong
+        let idNum = 0; //设置初始id号；
+
+        isCreateLi = true;//一上来的时候处于创建消息的状态;
+        isEdit = false;//编辑状态为否;
+
+        
+
+        window.addEventListener("storage",function(){
+            //console.log("我改变了");
+
+            //拿到localStorage中的内容渲染页面
+            let data = localStorage.getItem("message");
+            let dataObj = JSON.parse(data);//有值，是一个json对象；转成对象的格式
+            obj = dataObj;//当触发了storage说明有新数据，所以更新一下obj的内容；
+            let listHtml = "";
+            
+            for(var attr in dataObj){                
+                listHtml+=`<li class = "${dataObj[attr]["checked"] ? "completed" : "" }">
+                            <div class="view">
+                                <input class="toggle" type="checkbox" ischecked = "${dataObj[attr].checked}" data-id = ${dataObj[attr].id}>
+                                <label>${message[attr].messageVal}</label>
+                                <button class="destroy" ${dataObj[attr].id}></button>
+                            </div>
+                            <input class="edit" value="${message[attr].messageVal}" data-id = ${dataObj[attr].id}>
+                        </li>`;
+
+            }
+            todoList.innerHTML = listHtml;
+            count.innerHTML = calculation (obj);
+            toggleAllIsClick();//判断全选按钮是否可点
+        });
+
+        //一进入页面就渲染内容，根据localStorage渲染；
+        let data = localStorage.getItem("message");
+        let dataObj = {};
+        console.log(dataObj);
+        if(data){
+            console.log(dataObj);
+            dataObj = JSON.parse(data);//将数据转成数组，循环渲染页面；   
+              console.log(dataObj);         
+            let listHtml = "";
+            let m = 0;
+            for(var attr in dataObj){
+                m++;
+                listHtml+=`<li class = "${dataObj[attr]["checked"] ? "completed" : "" }">
+                            <div class="view">
+                                <input class="toggle" type="checkbox" ischecked = "${dataObj[attr].checked}"  data-id = ${dataObj[attr].id}>
+                                <label>${dataObj[attr].messageVal}</label>
+                                <button class="destroy" data-id = ${dataObj[attr].id}></button>
+                            </div>
+                            <input class="edit" value="${dataObj[attr].messageVal}" data-id = ${dataObj[attr].id}>
+                        </li>`;
+            }
+            idNum = m;          
+            todoList.innerHTML = listHtml;
+            //找打所有的单选按钮
+            let inputAll = todoList.getElementsByClassName("toggle");
+            toggleAllIsClick ();//判断全选按钮是否可点;
+            for( var i = 0; i < inputAll.length; i++ ){                
+                if(dataObj[inputAll[i].dataset.id].checked == true){
+                    inputAll[i].setAttribute("checked",true);   
+                }else{
+                    inputAll[i].removeAttribute("checked"); 
+                }
+            }            
+            //以下功能是判断是否全选
+            if(whoSelect(inputAll,"checked")==inputAll.length){
+                toggleAll.checked = true;
+            }else{
+                toggleAll.checked = false;
+            }
+
+            footer.style.display = "block";//下方操作按钮指示部分显示；
+            //判断全选按钮是否可点
+            count.innerHTML = calculation (dataObj);//判断有多少条信息未选中
+        }
+        let obj = dataObj;//使用obj来修改localStorage中的内容
+
+        
+        newTodo.onclick = function(){
+            isCreateLi = true;
+            isEdit = false;
+        } 
+
+        //newTodo.onblur();
+        document.addEventListener("keydown",function(ev){            
+            if(isCreateLi){                
+                if(ev.keyCode == 13){
+                    //console.log("create");
+                    toggleAll.checked = false;//全选按钮不被选中；
+                    toggleAll.disabled = false;//全选按钮可点击
+                    let val = newTodo.value.trim();//输入的内容
+                    if(val==""){
+                        return;
+                    }
+                    idNum++;
+                    console.log(dataObj);
+                    dataObj[idNum] = {
+                        "id": idNum,
+                        "checked":false,
+                        "messageVal":val
+                    }
+                    let newLi = document.createElement("li");
+                    
+                    newLi.innerHTML = `                                
+                                        <div class="view">
+                                            <input class="toggle" type="checkbox" ischecked = "false" data-id = ${idNum}>
+                                            <label>${val}</label>
+                                            <button class="destroy" data-id = ${idNum}></button>
+                                        </div>
+                                        <input class="edit" value="${val}" data-id = ${idNum}>
+                                    `;
+
+                    todoList.appendChild(newLi);
+                    localStorage.setItem("message",JSON.stringify(obj));               
+                    newTodo.value = "";
+                    toggleAll.style.display = "block";//全选按钮显示
+                    toggleAll.disabled = false;  //全选按钮可点
+                    footer.style.display = "block";//下方操作按钮指示部分；
+                    console.log(calculation (obj));
+                    count.innerHTML = calculation (obj);
+                }
+            }            
+        });
+
+        //利用事件委托写信息列表的点击交互
+        todoList.addEventListener("click",function(ev){
+            let target = ev.target;
+            //点击删除按钮
+            if(target.className==="destroy"){
+                let parent = target.parentNode.parentNode;
+                //console.log(parent);
+                let checkedId = target.dataset.id;
+                //根据Id删除对应的数据；
+                deleteDataById(checkedId,obj);
+                localStorage.setItem("message",JSON.stringify(obj));  
+                //console.log(obj);               
+                parent.remove();
+
+                count.innerHTML = calculation (obj);
+
+                //console.log(checkedI);
+                toggleAllIsClick ();//判断全选按钮是否可点;
+                //以下功能是判断是否全选
+                sureCheckAll(target);
+            }
+            //点击单选：
+            if(target.className==="toggle"){
+                //console.log(target);  
+                //console.log(target.getAttribute("ischecked")); 
+                console.log(target.dataset.id); 
+                changeDataByIdProp(obj,target,"checked");
+                //及时修改localStroage中的内容；
+                localStorage.setItem("message",JSON.stringify(obj));  
+                console.table(obj);
+                count.innerHTML = calculation (obj);     
+                sureCheckAll(target);//全选按钮是否被勾选
+            }
+        });
+
+        
+        //全选点击：        
+        toggleAll.onclick = function(){
+            console.log(toggleAll.checked);
+            for( var i = 0; i < checkedI.length; i++ ){
+                checkedI[i].checked = toggleAll.checked;
+                //通过指定元素和属性修改数据中对应的内容
+                changeDataByIdProp(obj,checkedI[i],"checked"); 
+                if(toggleAll.checked){
+                    checkedI[i].parentNode.parentNode.classList.add("completed"); 
+                }else{
+                    checkedI[i].parentNode.parentNode.classList.remove("completed"); 
+                }
+                
+            }
+            //及时修改localStroage中的内容；
+            localStorage.setItem("message",JSON.stringify(obj));  
+            console.table(obj);
+            count.innerHTML = calculation (obj);          
+        }
+
+
+       
+        //双击label事件;
+        let showVal = "";//用来存放显示的原始的value值
+        let editEl = "";//双击后显示的编辑块
+        todoList.addEventListener("dblclick",function(ev){
+            let target = ev.target;
+            if(target.nodeName==="LABEL"){
+                target.style.display = "none";
+                let parent = target.parentNode.parentNode;
+                console.log(target.parentNode);
+                let edit = parent.lastElementChild;
+                showVal = edit.value;
+                edit.style.display = "block";
+                editEl = edit;
+                isEdit = true;
+                isCreateLi = false;
+            }
+        });
+        
+
+        //如果是处在编辑状态下：
+        document.addEventListener("keydown",function(ev){
+            
+            if(isEdit){                
+                if(ev.keyCode == 13){
+                    console.log("isEdit");
+                    //编辑框editEl
+
+                    //编辑所在li的id;
+                    let clickId = editEl.dataset.id;
+                    console.log(clickId);
+                    let val = editEl.value.trim();//输入的内容
+                    if(val==""){
+                        val = showVal;
+                    }
+                    //console.log(val,editEl.value);
+                    editEl.previousElementSibling.style.display = "block";
+                    editEl.previousElementSibling.children[1].style.display = "block";
+                    editEl.previousElementSibling.children[1].innerHTML = val;
+                    editEl.style.display = "none";
+                    changeDataByIdVal(obj,val,clickId);
+                    localStorage.setItem("message",JSON.stringify(obj));                   
+                }
+            }
+        });
+        
+        document.addEventListener("click",function(ev){
+            if(ev.target.className == "newTodo"){//如果点击的是输入框，处于创建消息状态，
+                isCreateLi = true;
+                isEdit = false;
+            }            
+        });
+        
+    </script>
+</body>
+
+</html>
