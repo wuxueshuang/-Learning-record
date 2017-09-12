@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src = "../src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box">
+			<customs-cus></customs-cus>
+		</div>
+		<script>
+			//创建一个按钮组件，点击按钮value值++；
+			/*
+				思路：
+					Vue.component创建一个实例；将要改变的数值也就是组件自己的状态放在data中，但是data必须是一个函数，返回值必须是一个对象形式；
+					template中放入html结构；由于结构中需要动态的双向改变数据，用v-model绑定，@click添加点击事件;
+					
+			*/
+			Vue.component("customs-cus",{
+				data(){//必须是函数，返回值必须是对象
+					return {
+						n:1
+					}
+				},
+				template:
+					`
+					<div>
+						<input type = "button" v-model = "n" @click = "n++"/>
+					</div>
+					`
+			});
+			new Vue({
+				el:"#box",
+
+			});
+		</script>
+	</body>
+</html>
