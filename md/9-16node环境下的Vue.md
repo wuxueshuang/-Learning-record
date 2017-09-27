@@ -178,7 +178,7 @@ footer.vue
 	  },
 	  watch:{//观察者模式如果this.list改变就重新设置localStorage;
 	    list:{
-	      deep:true,
+	      deep:true,//深度监听，子级的子级也可以监听到
 	      handler(){
 	        localStorage.setItem("angel",JSON.stringify(this.list));
 	      }
