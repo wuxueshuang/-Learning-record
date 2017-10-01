@@ -60,7 +60,7 @@
 >
 >使用JSX时必须要引入babel.min.js，在运行的js代码中添加属性type="text/babel";
 
->		div id="box">
+>		div id=<"box">
 			<!--<h2>Hello,World!</h2>-->
 		</div>
 		<script type="text/babel">
@@ -105,7 +105,7 @@
 > 		</ul>
 > 	ReactDOM.render(
 > 		html,
-> 		document.getAlementById("box")	
+> 		document.getElementById("box")	
 > 	)
 	
 **react中的插值**：
@@ -136,7 +136,7 @@
 
 >		ReactDOM.render(
 			<List></List>,
-			document.getAlementById("box")	
+			document.getElementById("box")	
 		)
 
 >***自定义标签和组件区分***
@@ -178,7 +178,7 @@
 				return (
 					<div>
 						<h2></h2>
-						<List customs={this.props.title||'Hello'}></List>
+						<List customs={this.props.list'}></List>
 					</div>
 				)
 			}
@@ -281,7 +281,7 @@
 		}
 功能：点击按钮更改按钮的背景颜色：
 
-	<script type="text/babel">
+		<script type="text/babel">
 		class Btn extends React.Component{
 			constructor(props){
 				super(props);

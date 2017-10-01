@@ -1,0 +1,59 @@
+.bg{
+	width: 1000px;
+	height: 700px;
+	background: url(../images/001.png);
+	position: relative;
+}
+.btn1{
+	width: 150px;
+	height: 40px;
+	background: #c4c2de;
+	border: 1px solid #4f497e;
+	border-radius: 20px;
+	color: #fff;
+	position: absolute;
+	top: 137px;
+	left: 314px;
+}
+.btn2{
+	left: 524px;
+}
+.show-box{
+	position: absolute;
+	left:104px;
+	top:237px;
+	width:780px;
+	height:386px;
+}
+.show-box img{
+	position: absolute;
+}
+/* .img1{
+	
+	top: 237px;
+	left: 104px;
+}
+.img2{
+	left: 314px;
+}
+.img3{
+	left: 524px;
+}
+.img4{
+	left: 734px;
+}
+.img5{
+	top: 460px;
+}
+.img6{
+	top: 460px;
+	left: 314px;
+}
+.img7{
+	top: 460px;
+	left: 524px;
+}
+.img8{
+	top: 460px;
+	left: 734px;
+} */
