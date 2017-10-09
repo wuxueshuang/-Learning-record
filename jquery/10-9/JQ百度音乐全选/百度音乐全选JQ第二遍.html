@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>百度音乐全选</title>       
+		<link rel="stylesheet" href="css/reset.css"/>       
+		<link rel="stylesheet" href="css/baidumisic.css"/>
+		<style>
+			
+		</style>
+		<script src="../../src/jquery-3.2.1.js"></script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="box">
+				<ul class="list">
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox1"/>
+					   <span class="fl">私奔</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox2"/>
+						<span class="fl">北京北京</span>
+						<p class="fr">梁博、黄勇</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox3"/>
+						<span class="fl">我爱你中国</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox4"/>
+						<span class="fl">花火</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox5"/>
+						<span class="fl">回来</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox6"/>
+						<span class="fl">爱要有你才完美</span>
+						<p class="fr">梁博</p>
+					</li>
+				</ul>
+				<div class="bottom clearfix">				
+					<div class="fl" id="alls">
+						<input type="checkbox" class="fl" id="checkbox7"/>						
+						<span class="all fl">全部</span>
+					</div>
+					<p class="fl icon1 collect">收藏</p>
+					<p class="fl icon1 add">添加</p>
+					<p class="fl icon1 del">删除</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(function(){
+				let lis = $('.list li');//所有的li
+				let checkedAll = $('#checkbox7');//全选按钮
+				let inputs = $(".list input");
+				//实现隔行变色功能
+				$(".list li:even").css('background','#fff');
+				$(".list li:odd").css('background',"pink");
+				let arr = ['#fff','pink'];
+				//鼠标移入
+				lis.mouseenter(function(){
+						//console.log($(this).index());当前操作的li的下标
+						//lis.eq($(this).index()).css('background','yellow');
+						$(this).css('background','yellow');
+					})
+					.mouseleave(function(){
+						//lis.eq($(this).index()).css('background','red');
+						//$(this).css('background','red');
+						//离开时判断单选按钮是否被勾选
+						let input = $(this).find('input');//找到当前li里的单选按钮
+						if(!$(input).prop("checked")){
+							$(this).css('background',arr[$(this).index()%2]);
+						}
+						
+					})
+				//点击全选
+				checkedAll.click(function(){
+					//console.log($(this).prop('checked'));
+					let checked = $(this).prop('checked');//全选按钮的选中状态
+					//console.log(inputs);
+					inputs.prop('checked',checked);//所有单选按钮的选中状态与全选按钮保持一致
+					if(checked){//如果全选按钮被勾选了，所有的li背景都变为选中的黄色
+						lis.css('background','yellow');
+					}else{//如果全选按钮没有被勾选，那么所有的li实现隔行变色的效果
+						$(".list li:even").css('background','#fff');
+						$(".list li:odd").css('background',"pink");
+					}
+				})
+
+				//点击单选按钮
+				inputs.click(function(){
+					let uncheckedLi = inputs.toArray().find(function(item){//将所有的单选按钮里没有被选中的找出来，如果没有返回undefined;
+						return item.checked===false;
+
+					});
+					//console.log(uncheckedLi);
+					checkedAll.prop('checked',!uncheckedLi);//设置状态的时候根据有没有不被选中的单选按钮取布尔值来设置全选按钮的状态
+				})
+			});
+		</script>
+	</body>
+</html>

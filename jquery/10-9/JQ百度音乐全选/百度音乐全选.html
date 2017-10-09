@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>百度音乐全选</title>       
+		<link rel="stylesheet" href="css/reset.css"/>       
+		<link rel="stylesheet" href="css/baidumisic.css"/>
+		<style>
+			
+		</style>
+		<script src="../../src/jquery-3.2.1.js"></script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="box">
+				<ul class="list">
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox1"/>
+					   <span class="fl">私奔</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox2"/>
+						<span class="fl">北京北京</span>
+						<p class="fr">梁博、黄勇</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox3"/>
+						<span class="fl">我爱你中国</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox4"/>
+						<span class="fl">花火</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox5"/>
+						<span class="fl">回来</span>
+						<p class="fr">梁博</p>
+					</li>
+					<li class="item clearfix">
+						<input type="checkbox" class="fl" id="checkbox6"/>
+						<span class="fl">爱要有你才完美</span>
+						<p class="fr">梁博</p>
+					</li>
+				</ul>
+				<div class="bottom clearfix">				
+					<div class="fl" id="alls">
+						<input type="checkbox" class="fl" id="checkbox7"/>						
+						<span class="all fl">全部</span>
+					</div>
+					<p class="fl icon1 collect">收藏</p>
+					<p class="fl icon1 add">添加</p>
+					<p class="fl icon1 del">删除</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(function(){
+				//实现隔行变色
+				$('.list li:even').css('background','#fff');
+				$('.list li:odd').css('background','pink');
+				let arr = ['#fff','pink'];//将背景颜色存放到数组里
+				//list下所有的li
+				let lis = $('.list li');
+				let inputs = $('.list input')
+				//鼠标移入移出事件，放到ul身上，使用事件委托
+				lis.mouseenter(function(){
+						//移入时背景变成红色
+						$(this).css('background','#f40')
+					})
+				    .mouseleave(function(){
+				    	//离开时背景恢复隔行变色
+				    	//console.log($(this).index());//当前离开元素的下标，下标%2来去arr里的每一项作为背景色
+				    	let input = $(this).find('input');//找到当前li中的input
+				    	if(input.prop('checked')){
+				    		return;
+				    	}
+				    	$(this).css('background',arr[$(this).index()%2]);
+				    })
+
+				//全选
+				$('#checkbox7').click(function(){
+					//console.log(123);
+					//console.log($(this).prop('checked'));
+					let checked = $(this).prop('checked');
+					inputs.prop('checked',checked);//实现全选按钮与单选按钮勾选同步
+					if(checked){//如果是选中状态
+						lis.css('background','#f40');
+					}else{
+						$('.list li:even').css('background','#fff');
+						$('.list li:odd').css('background','pink');
+					}
+				});
+				//单选
+				$('.list').on('click','input',function(){
+					let i = inputs.toArray().find(function(item){
+						console.log(!item.checked);
+						return item.checked===false;
+					})
+					$('#checkbox7').prop("checked",!i);
+				})
+			})
+		</script>
+	</body>
+</html>
