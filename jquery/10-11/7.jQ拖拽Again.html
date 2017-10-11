@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				position:absolute;
+				top:0;
+				left:0;
+				text-align:center;
+				font-size:50px;
+			}
+			#box2{
+				left:100px;
+				background:yellow;
+			}
+		</style>
+		<script src="../src/jquery-3.2.1.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box1">div1</div>
+		<div id = "box2">div2</div>
+	<script>
+		//定义一个类，用来做拖拽，在做拖拽的过程中不做具体的内容；把使用权交给使用者；
+		class Drag{
+			constructor(dragBox){
+				this.dragBox = dragBox;
+				this.dragInit();//启动总程序
+			}
+			dragInit(){
+				$(this.dragBox).mousedown(this.downFn.bind(this));
+			}
+			downFn(ev){
+				//console.log('down');
+				this.disX = ev.clientX - $(this.dragBox).offset().left;
+				this.disY = ev.clientY - $(this.dragBox).offset().top;
+				console.log(this.disX,this.disY);
+				//当函数使用bind改变this指向后，执行后返回了新的函数，原来的函数已经找不到了，在up的时候解绑，就找不到这个事件的执行函数了，所以我们把他存到了变量里；
+				/*$(this.dragBox).mousemove(this.moveFn.bind(this));
+				$(this.dragBox).mouseup(this.upFn.bind(this));*/
+
+				this.bindMoveFn = this.moveFn.bind(this);
+				this.bindUpFn = this.upFn.bind(this);
+
+
+				$(document).mousemove(this.bindMoveFn);
+				$(document).mouseup(this.bindUpFn);
+				ev.preventDefault();//阻止默认行为
+			}
+			moveFn(ev){
+				console.log('move');
+				$(this.dragBox).css({
+					left:ev.clientX - this.disX,
+					top:ev.clientY - this.disY
+				});
+			}
+			upFn(){
+				console.log("执行了");
+				$(document).off("mousemove", this.bindMoveFn);
+				$(document).off("mouseup",this.bindUpFn);
+			}
+		}
+
+		let box1 = $("#box1");
+		let box2 = $("#box2");
+
+		//得到一个实例；
+		let t = new Drag(box1[0]);
+		let t2 = new Drag(box2[0]);
+	</script>
+	</body>
+</html>

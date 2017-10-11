@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="slide.css" />
+		<style type="text/css">
+			body{
+				background-color: #ffd800;
+			}
+			.nav .blue {
+				background-color: blue;
+			}
+		</style>
+		<script>
+			/*
+				当给一个元素添加样式，如没有起作用，第一反应
+
+					检查元素
+			*/
+		</script>
+	</head>
+
+	<body>
+		<div class="slide">
+			<div  class="tagClient">
+				<ul class="list">
+					<li><img src="./ads/1.png" /></li> 
+					<li><img src="./ads/2.png" /></li> 
+					<!--<li><img src="./ads/3.png" /></li> 
+					<li><img src="./ads/4.png" /></li> 
+					<li><img src="./ads/5.png" /></li>-->
+					<!--<li><img src="./ads/1.png" /></li>-->
+				</ul>
+			</div>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<div class="nav">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<script src="./utils.js"></script>
+		<script src="../../src/jquery-3.2.1.js"></script>
+		<script>
+			//runjs
+			/*
+				1. 切换下一张 运动
+					运动的终点位置：
+					第一张图片 -530*0
+					第二张图片 -530*1px
+					第三张图片 -530*2px
+					第四张图片 -530*3px
+			*/
+			console.log($);
+			/*var next = $(".next")[0];
+			var list = $(".list")[0];
+			var lis = $("li",list);
+			var n = 0;
+			var timer = null;
+			
+			function tab (){
+				n++;
+
+				var target = -530 * n;  // 目标位置
+
+				mTween(list,"left",target,100,"linear",function(){
+					if(n==lis.length-1){
+						list.style.left = "0px";
+						n=0;
+					}
+					for(var j = 0; j < spans.length; j++ ){
+	    				spans[j].style.background = "";
+					}
+					spans[n].style.background = "red";
+				})
+			}
+			timer = setInterval(tab,1000);
+			next.onmouseover = function(){
+				clearInterval(timer);
+			}
+			next.onclick = function (){
+				if(list.timer){
+					return;
+				}
+				tab ();
+				// 如果正在运动，没必要n++和调用mTween
+				
+
+			};
+			next.onmouseout = function (){
+				timer = setInterval(tab,1000);
+			}
+			var prev = $(".prev")[0];
+			prev.onmouseover = function(){
+				clearInterval(timer);
+			}
+			prev.onclick = function(){
+				n--;
+				if(n < 0){
+					list.style.left = -530*(lis.length-1)+"px";
+					n=lis.length - 2;
+				}
+				for(var j = 0; j < spans.length; j++ ){
+	    				spans[j].style.background = "";
+					}
+				spans[n].style.background = "red";
+
+				var target = n*-530;
+				mTween(list,"left",target,100);
+			}
+			prev.onmouseout = function (){
+				timer = setInterval(tab,1000);
+			}
+
+			//点击小按钮：
+			
+			var spans = $("span",$(".nav")[0]);
+			var prevIndex = "";
+			for(var i=0;i < spans.length;i++){
+				spans[i].index = i;
+				spans[i].onmouseover = function (){
+					clearInterval(timer);
+					for(var j = 0; j < spans.length; j++ ){
+	    				spans[j].style.background = "";
+					}	    			
+					this.style.background = "red";
+		    			var target = this.index*-530;
+		    			n = this.index;
+						mTween(list,"left",target,100);			
+				}
+				
+				spans[i].onmouseout = function (){
+					timer = setInterval(tab,1000);
+				}
+			}*/
+
+			/*let n = 0;
+			let len = $(".list li").length;
+			let w = $(".list li").eq(0).width();//获取list下第一个li的宽度，也就是一张图片的宽度
+			let  spans = $(".nav span");
+			spans.eq(0).addClass("blue");
+			console.log(w);
+			$(".next").click(function(){
+				//处理狂点，判断是否有动画正在进行
+				if($(".list").is(":animated")){
+					return;
+				}
+				n++;
+				if(n > len-1){
+					n = 0;
+				}
+				$(".list").animate({
+					left:-n*w
+				},300)
+				//控制小按钮的样式
+				spans.eq(n-1).removeClass("blue");
+				spans.eq(n).addClass("blue");
+			})
+
+			$(".prev").click(function(){
+				//处理狂点，判断是否有动画正在进行
+				if($(".list").is(":animated")){
+					return;
+				}
+				n--;
+				if(n < 0){
+					n = len-1;
+				}
+				$(".list").animate({
+					left:-n*w
+				},300)
+
+				//控制小按钮的样式				
+				spans.eq(n === len - 1 ? 0 : n+1).removeClass('blue');
+				spans.eq(n).addClass("blue");
+
+			})
+			//小按钮操作：
+			spans.mouseover(function(){	
+				$(this).addClass("blue");
+				spans.eq(n).removeClass("blue");			
+				n = $(this).index();//让n等于当前鼠标移入的小按钮的下标是之显示对应的图片
+				$(".list").animate({
+					left:-n*w
+				},300)
+			});*/
+
+			//无缝滚动；
+			//两张img切换，第一个img存的是第二个img的内容，第二个img存的内容永远是新的；
+			let imgArr = ["./ads/1.png","./ads/2.png","./ads/3.png","./ads/4.png","./ads/5.png"];			
+			let w = $(".list li").eq(0).width();//获取list下第一个li的宽度，也就是一张图片的宽度
+			let  spans = $(".nav span");
+			spans.eq(0).addClass("blue");
+			let n = 0;
+			let len = imgArr.length;
+			let imgs = $(".list img");
+			$(".next").click(function(){
+				if($(".list").is(":animated")){
+					return;
+				}
+				n++;	
+				if(n>len-1){
+					n=0;
+				}
+
+				imgs[1].src = imgArr[n];	
+				spans.eq(n-1).removeClass("blue")
+				spans.eq(n).addClass("blue");		
+				$(".list").animate({
+					left:-w
+				},300,function(){
+					$(".list").animate({
+					left:0
+				},10)
+					imgs[0].src = imgs[1].src;
+				})
+			});
+
+			$(".prev").click(function(){
+				if($(".list").is(":animated")){
+					return;
+				}
+				n--;
+				if(n < 0){
+					n = len-1;
+				}
+				console.log(n);
+				spans.eq(n === len - 1 ? 0 : n+1).removeClass('blue');
+				spans.eq(n).addClass("blue");
+				$(".list").css("left",-w);//list先到-530的位置，然后向右做运动；
+				imgs[1].src = imgs[0].src;
+				imgs[0].src = imgArr[n];
+				$(".list").animate({
+					left:0
+				},300)
+
+			})
+		</script>
+	</body>
+
+</html>
