@@ -137,7 +137,8 @@ jQ代码：
 **(插入元素).insertbefore(被插入元素)** 
 >在每个匹配的元素之前插入内容。
 功能：每个p标签前面插入一个a
-HTML 代码:
+
+>HTML 代码:
 
 > 	<div class="xiaoshuo">
 		<p>山丘</p>
@@ -153,7 +154,9 @@ jQ代码：
 
 ###.wrap()
 >把所有匹配的元素用其他元素的结构化标记包裹起来。
+>
 功能：每个p标签外面包裹一个div
+>
 HTML 代码:
 
 > 	<div class="xiaoshuo">
@@ -170,8 +173,11 @@ jQ代码：
 
 ###.unwrap()
 >这个方法将移出元素的父元素。这能快速取消 .wrap()方法的效果。匹配的元素（以及他们的同辈元素）会在DOM结构上替换他们的父元素。
-功能：每个p标签外面的li去掉
-HTML 代码:
+>
+>
+>功能：每个p标签外面的li去掉
+
+>HTML 代码:
 
 > 	<div class="xiaoshuo">
 		<li><p>山丘</p></li>
@@ -180,7 +186,7 @@ HTML 代码:
 jQ代码：
 
 >	  
->	      $('p').unwrap("li")
+>	     $('p').unwrap("li")
 ###.empty()
 >删除匹配的元素集合中所有的子节点。
 >功能：每个.xaoshou里的内容清空
@@ -193,7 +199,7 @@ HTML 代码:
 jQ代码：
 
 >	  
->	      $('.xiaoshou').empty()
+>	    $('.xiaoshou').empty()
 ###.clone();
 >* 作用：
 >  * 克隆匹配的DOM元素并且选中这些克隆的副本。
@@ -210,6 +216,7 @@ jQ代码：
 			false 代表不克隆子集，默认为false；
 ###. end()
 >* 作用： 回到最近的一个"破坏性"操作之前。即，将匹配的元素列表变为前一次的状态。
+>
 >eg:
 
 > 		$('#active').css('background','red').text('miaov').attr('miaov','ketang').siblings('.yellow')//如果仍然想要操作$("#active")需要使用.end()
@@ -319,7 +326,156 @@ jQ代码：
 					不带结构 纯文本
 
 
+##.is()
+> 根据选择器、DOM元素或 jQuery 对象来检测匹配元素集合，如果其中至少有一个元素符合这个给定的表达式就返回true。
 
+
+> 如果没有元素符合，或者表达式无效，都返回'false'。 '''注意：'''在jQuery 1.3中才对所有表达式提供了支持。在先前版本中，如果提供了复杂的表达式，比如层级选择器（比如 + , ~ 和 > ），始终会返回true
+
+>is 用来做判断
+>html
+
+>         <div>
+			<div class="active"></div>
+		</div>
+		<div></div>
+		<div></div>
+>jQ代码：
+>             
+>            // 找到那些包含input为text的div
+			$(document).click(function (){
+				// 获取正在运动的元素
+				//$("div:animated").css('background','blue');
+				// 获取没有运动的元素
+				//$("div:not(':animated')").css('background','blue');
+
+
+>				//console.log($('div:first').is(':animated'));
+
+>				//console.log($(".active").parent().is("body"));
+			})
+
+###.has()
+> 保留包含特定后代的元素，去掉那些不含有指定后代的元素。
+
+
+>.has()方法将会从给定的jQuery对象中重新创建一组匹配的对象。提供的选择器会一一测试原先那些对象的后代，含有匹配后代的对象将得以保留。
+>html   
+>          
+>         <div id="active"><p>123</p></div>
+		<div><p>123</p></div>
+		<div><p>123</p></div>
+		<div><a href="">baidu </a></div>
+> jQ代码：
+> 
+>             $(document).click(function (){
+> 				// 一个元素指定是否包含另一个元素
+> 
+> 				// 一堆div中后代包含a标签的
+> 				console.log($("div").has('a'));
+> 
+> 				// 不要直接获取后判断有没有获取到元素 length
+> 
+> 				if( $("div").has('a').length ){
+> 					console.log(123);
+> 				}
+> 
+> 			})
+
+
+###.off()
+> .off([type,listener])
+> 
+> type 事件类型
+> 
+> listener 监听器
+> 
+> 
+> 不写参数 会取消掉元素所有事件的监听器（函数）
+> 
+> 写了type  就会取消这个type对应的所有的监听器（函数）
+> 
+> 写了type和listener 就会取消这个type对应的listener这个监听器（函数）
+> jQ代码
+>
+>       $(document).mouseover(function (){
+			console.log('mouseover');		
+		})
+		$(document).click(function (){
+			console.log('click');		
+		})
+		$(document).click(function (){
+			console.log('click');		
+		})
+		function fn(){
+			console.log('click');		
+		}
+		$(document).click(fn)
+		$(document).mouseout(function (){
+			console.log('mouseout');		
+		})
+
+>		//$(document).off('click');
+		$(document).off('click');
+
+
+###.offset()
+> 获取匹配元素在当前视口的相对偏移
+
+>.offset().left
+>
+>.offset().top
+
+###.position()
+> 获取到元素相对于父级的偏移量，相当于原生中的offsetLeft,offsetTop
+> 
+> .position().left
+>
+>.position().top
+
+>html
+>
+>         <div class="boxPosition">
+			<div class="box2"></div>
+		</div>
+> css
+>
+>     .boxPosition {
+			width: 500px;
+			height: 500px;
+			border: 1px solid #000;
+			position: relative;
+		}
+		.box2 {
+			width: 100px;
+			height: 100px;
+			background: red;
+			position: absolute;
+			left: 100px	;
+			top: 0;
+		}  
+>jQ代码
+
+>      console.log( $('.box2').offset().left );//109
+	 console.log( $('.box2').position().left );//100
+
+###.trigger()
+> 自定义事件
+
+>      $("input").on('click_customs',(function(){//系统中并没有给我们提供click_customs这个事件；点击时注册一个click123事件
+> 				console.log('123');
+> 			}))
+> 
+> 			$("input").click(function(){
+ 				$("input").trigger('click_customs')//点击的时候发布一个自定义事件click_customs
+ 			})
+
+>再举个栗子：
+>
+>       $("p").click( function (event, a, b) {
+		  // 一个普通的点击事件时，a和b是undefined类型
+		  // 如果用下面的语句触发，那么a指向"foo",而b指向"bar"
+		} ).trigger("click", ["foo", "bar"]);
 ##jQ重写数据筛选
 		<!DOCTYPE html>
 		<html lang="en">
@@ -512,3 +668,238 @@ jQ代码：
 			</script>
 		</body>
 		</html>
+##jQ之拖拽
+
+html
+
+	<div id = "box1">div1</div>
+	<div id = "box2">div2</div>
+
+css
+	div{
+		width:100px;
+		height:100px;
+		background:red;
+		position:absolute;
+		top:0;
+		left:0;
+		text-align:center;
+		font-size:50px;
+	}
+	#box2{
+		left:100px;
+		background:yellow;
+	}
+js
+
+	//原生方法面向对象
+	class Drag{
+		DragInit(dragBox){//init中的参数，接收的是拖拽的元素
+			this.dragBox = dragBox;
+			this.dragBox.onmousedown = this.downFn.bind(this);
+		}
+		downFn(ev){
+			this.disX = ev.clientX - this.dragBox.offsetLeft;
+			this.disY = ev.clientY - this.dragBox.offsetTop;
+			document.onmousemove = this.moveFn.bind(this);
+			document.onmouseup= this.upFn.bind(this);
+		}
+		moveFn(ev){
+			this.dragBox.style.left = ev.clientX - this.disX + "px";
+			this.dragBox.style.top = ev.clientY - this.disY + "px";
+		}
+		upFn(){
+			document.onmousemove = document.onmouseup = null;
+		}
+	}
+	//jQ代码
+	class Drag {
+		constructor(dragBox){
+			this.dragBox = dragBox;
+			this.DragInit();//启动（运动函数的总入口）
+		}
+		DragInit(){				
+			this.dragBox.onmousedown = this.downFn.bind(this);				
+		}
+		downFn(ev){
+			console.log(111)
+			this.disX = ev.clientX - $(this.dragBox).offset().left;
+			this.disY = ev.clientY - $(this.dragBox).offset().top;
+			//console.log(this.disX,this.disY);
+			//调用bind之后会返回新的函数，把这个函数挂在在实力上；
+			//目的是在取消的时候可以取消这个新的函数；因为返回的这个新函数才是真正的事件处理函数；
+			this.bindMove = this.moveFn.bind(this);
+			this.bindUp = this.upFn.bind(this);
+
+			//发布一个事件 custom-down
+
+			$(document).mousemove(this.bindMove);
+			$(document).mouseup(this.bindUp)
+		}
+		moveFn(ev){
+			console.log(ev.clientX - this.disX);
+			$(this.dragBox).css('left',ev.clientX - this.disX );
+			$(this.dragBox).css('top',ev.clientY - this.disY );
+		}
+		upFn(){
+			//$(document).off('mousemove mouseup')
+			$(document).off('mousemove',this.bindMove)
+			$(document).off('mouseup',this.bindUp)
+		}
+	}
+##jQ轮播图无缝滚动
+ 
+html
+
+	<div class="slide">
+		<div  class="tagClient">
+			<ul class="list">
+				<li><img src="./ads/1.png" /></li> 
+				<li><img src="./ads/2.png" /></li> 
+				<!--<li><img src="./ads/3.png" /></li> 
+				<li><img src="./ads/4.png" /></li> 
+				<li><img src="./ads/5.png" /></li>-->
+				<!--<li><img src="./ads/1.png" /></li>-->
+			</ul>
+		</div>
+		<div class="prev"></div>
+		<div class="next"></div>
+		<div class="nav">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+jQ代码
+
+	/*
+	无缝滚动；
+	两张img切换，
+	点击next按钮：
+			list是从右往左运动，第一个img存的是第二个img的内容，第二个img存的内容永远是新的；
+			实现过程：
+				1.第二个img的内容改成新的。
+				2.从右往左运动.
+				3.将list拉回原来的位置，left为0；
+				4.将第一个img的内容改为第二个img的内容；
+	点击prev按钮：	
+			list是从左向右移动的；第二个img存的是第一个img的内容，第一个img存的是新的内容，
+			实现过程：
+				1.将list拉到左边负一个图片的位置，即-530px;
+				2.第二个img的内容改为第一个img的内容，第一个img改为新的内容，
+				3.将list的位置拉回0；
+	*/
+			let imgArr = ["./ads/1.png","./ads/2.png","./ads/3.png","./ads/4.png","./ads/5.png"];			
+			let w = $(".list li").eq(0).width();//获取list下第一个li的宽度，也就是一张图片的宽度
+			let  spans = $(".nav span");
+			spans.eq(0).addClass("blue");
+			let n = 0;
+			let len = imgArr.length;
+			let imgs = $(".list img");
+			$(".next").click(function(){
+				if($(".list").is(":animated")){
+					return;
+				}
+				n++;	
+				if(n>len-1){
+					n=0;
+				}
+
+				imgs[1].src = imgArr[n];	
+				spans.eq(n-1).removeClass("blue")
+				spans.eq(n).addClass("blue");		
+				$(".list").animate({
+					left:-w
+				},300,function(){
+					$(".list").animate({
+					left:0
+				},10)
+					imgs[0].src = imgs[1].src;
+				})
+			});
+
+			$(".prev").click(function(){
+				if($(".list").is(":animated")){
+					return;
+				}
+				n--;
+				if(n < 0){
+					n = len-1;
+				}
+				console.log(n);
+				spans.eq(n === len - 1 ? 0 : n+1).removeClass('blue');
+				spans.eq(n).addClass("blue");
+				$(".list").css("left",-w);//list先到-530的位置，然后向右做运动；
+				imgs[1].src = imgs[0].src;
+				imgs[0].src = imgArr[n];
+				$(".list").animate({
+					left:0
+				},300)
+
+			})
+
+###.extend()
+>语法：
+>
+>       jQuery.extend([deep], target, object1, [objectN])
+>作用：
+>       用一个或多个其他对象来扩展一个对象，返回被扩展的对象。 原生中用**assign**
+
+##jQ插件封装
+
+	插件封装其实就是封装一个方法，在jQuery函数，和jQuery的原型上挂载这个方法；通常我们把这个方法放在对象里，将这个对象通过exend去和jQuery或者jQuery构造函数合并；
+	;(function($){
+
+		//定义一个类，用来做拖拽，在做拖拽的过程中不做具体的内容；把使用权交给使用者；
+		class Drag {
+			constructor(dragBox){
+				this.dragBox = dragBox;
+				this.DragInit();
+			}
+			DragInit(){	
+				//console.log(123);			
+				this.dragBox.mousedown(this.downFn.bind(this))		
+			}
+			downFn(ev){
+				console.log(111)
+				this.disX = ev.clientX - $(this.dragBox).offset().left;
+				this.disY = ev.clientY - $(this.dragBox).offset().top;
+				//console.log(this.disX,this.disY);
+				//调用bind之后会返回新的函数，把这个函数挂在在实力上；
+				//目的是在取消的时候可以取消这个新的函数；因为返回的这个新函数才是真正的事件处理函数；
+				this.bindMove = this.moveFn.bind(this);
+				this.bindUp = this.upFn.bind(this);
+
+				//发布一个事件 custom-down
+
+				$(document).mousemove(this.bindMove);
+				$(document).mouseup(this.bindUp);
+			}
+			moveFn(ev){
+				console.log(ev.clientX - this.disX);
+				$(this.dragBox).css('left',ev.clientX - this.disX );
+				$(this.dragBox).css('top',ev.clientY - this.disY );
+			}
+			upFn(){
+				//$(document).off('mousemove mouseup')
+				$(document).off('mousemove',this.bindMove)
+				$(document).off('mouseup',this.bindUp)
+			}
+		}
+		$.fn.extend({
+			drag(){
+				console.log(this);  // 指向调用drag的jq对象
+
+				new Drag(this)
+			}
+		})
+		/*$.fn.extend({
+			drag(){
+				return new Drag(this);
+			}
+		})*/
+	})(jQuery);
+	let t = $("#box1").drag();
