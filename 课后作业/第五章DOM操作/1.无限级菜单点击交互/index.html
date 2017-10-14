@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+    
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .main {
+        width: 100%;
+        height: 100%;
+        background: url(./image/bg.png) no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    
+    .logo {
+        display: block;
+        width: 200px;
+        height: 55px;
+        background: url(./image/logo.png) no-repeat;
+        margin: 20px auto;
+    }
+    
+    ul {
+        list-style: none;
+        font-size: 22px;
+        color: #8c949c;
+        font-weight: bold;
+    }
+    
+    ul li {
+        position: relative;
+        padding-left: 10px;
+    }
+    
+    ul li div {
+        height: 98%;
+        width: 1px;
+        border-left: 1px dotted #ccc;
+        position: absolute;
+        left: 14px;
+        top: 18px;
+    }
+    
+    ul ul {
+        display: none;
+    }
+    
+    ul li span {
+        display: block;
+        line-height: 32px;
+        padding-left: 15px;
+        background: url(./image/icon.png) no-repeat left 500px;
+    }
+    
+    ul li span.add {
+        background-position: 0px -32px;
+    }
+    
+    ul li span.line {
+        background-position: 0px 11px;
+    }
+    
+    .tree {
+        margin-left: 300px;
+    }
+    </style>
+    <script>
+    
+
+    // 数据是怎么设计的？
+    // 先设计一个菜单的数据
+
+    /*
+        {
+            title:
+            child:
+        },
+        {
+            title:
+            child:
+        }
+
+        [{
+            title:"1"
+            child: [
+                {
+                    title:"2",
+                    child:[]
+                },
+                {
+                    title:"2"
+                }
+            ]
+        },
+        {
+            title:"1"
+            child:
+        }]
+    */
+
+
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <a href="http://www.miaov.com" class="logo"></a>
+        <div class="tree"  id="list">
+            <!--<ul>
+                  <li>
+                    <span class="line">第一集菜单</span>
+                    <ul style="display: block;">
+                        <li><span>第二集菜单</span></li>
+                        <li><span>第二集菜单</span></li>
+                        <li>
+                            <span class="line">第二集菜单</span>
+                            <ul style="display: block;">
+                                <li><span>第三集菜单</span></li>
+                                <li><span>第三集菜单</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> 
+            </ul> -->
+        </div>
+    </div>
+    <script>
+        var arr = [{
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一集菜单"
+    }];
+        var main = document.getElementsByClassName("main")[0];
+            console.log(main);
+        function render(data){
+            var html= "<ul>";               
+            data.forEach(function(item){
+                html += `<li>                           
+                             <span class="line">${item.title}</span>`;
+                            if(item.child){
+                                html+= render(item.child);
+                        }
+                            `
+                        </li>`;
+            });
+            html+= "</ul>";
+            return html;
+        }
+        render(arr);
+        main.innerHTML =render(arr);
+        var list = document.getElementsByTagName("ul")[0];
+       
+
+
+
+        //初始化；将ul下所有ul的隐藏,所有的span的class名改变
+        var ulAll = list.getElementsByTagName("ul");
+        var spanAll = list.getElementsByTagName("span");//ul下所有菜单条；
+        console.log(spanAll);
+        for(var i = 0;i<spanAll.length;i++){
+            spanAll[i].className = "add";
+        }
+
+        lis = list.children;
+        //循环点击每个lis的子集span，下面的ul显示；同时span的背景图片换；
+
+       
+        var spans = [] ; //获取lis所有的子集span； //获取ul下的所有第一级菜单：
+        for(var i = 0;i<lis.length;i++){
+           spans.push(lis[i].querySelector("span"));
+        }
+
+        var uls = [] ; //获取lis所有的子集ul；
+        for(var i = 0;i<lis.length;i++){
+            if(lis[i].querySelector("ul")){//判断每个li下边是否有ul,如果有放到uls的数组中；
+                uls.push(lis[i].querySelector("ul"));
+            }           
+        }
+
+
+
+        console.log(spans,uls);
+        /*------------------------将所有的菜单都折叠起来；----------------------------*/
+        for(var i = 0;i<spans.length;i++){
+            spans[i].index = i;
+            spans[i].className = "add";
+        }
+
+        //隐藏li下面的ul;
+        for(var i = 0;i<uls.length;i++){            
+            uls[i].style.display = "none";
+        }
+
+
+
+
+
+
+        for(var i = 0;i<spans.length;i++){
+            spans[i].isClick = false;
+            spans[i].index = i;
+            spans[i].onclick = function(){
+                for(var j = 0;j<lis.length;j++){
+                    lis[j].querySelector("span").className = "add";
+                    if(lis[j].querySelector("ul")){
+                      lis[j].querySelector("ul").style.display = "none"; 
+                    }
+                }               
+                this.className = "line";
+                uls[this.index].style.display = "block";
+                this.isClick = true;
+            }
+        }
+        
+        
+    </script>
+</body>
+
+</html>

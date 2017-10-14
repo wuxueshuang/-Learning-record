@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+    
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .main {
+        width: 100%;
+        height: 100%;
+        background: url(./image/bg.png) no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    
+    .logo {
+        display: block;
+        width: 200px;
+        height: 55px;
+        background: url(./image/logo.png) no-repeat;
+        margin: 20px auto;
+    }
+    
+    ul {
+        list-style: none;
+        font-size: 22px;
+        color: #8c949c;
+        font-weight: bold;
+    }
+    
+    ul li {
+        position: relative;
+        padding-left: 10px;
+    }
+    
+    ul li div {
+        height: 98%;
+        width: 1px;
+        border-left: 1px dotted #ccc;
+        position: absolute;
+        left: 14px;
+        top: 18px;
+    }
+    
+    ul ul {
+        display: none;
+    }
+    
+    ul li span {
+        display: block;
+        line-height: 32px;
+        padding-left: 15px;
+        background: url(./image/icon.png) no-repeat left 500px;
+    }
+    
+    ul li span.add {
+        background-position: 0px -32px;
+    }
+    
+    ul li span.line {
+        background-position: 0px 11px;
+    }
+    
+    .tree {
+        margin-left: 300px;
+    }
+    </style>
+    <script>
+    
+
+    // 数据是怎么设计的？
+    // 先设计一个菜单的数据
+
+    /*
+        {
+            title:
+            child:
+        },
+        {
+            title:
+            child:
+        }
+
+        [{
+            title:"1"
+            child: [
+                {
+                    title:"2",
+                    child:[]
+                },
+                {
+                    title:"2"
+                }
+            ]
+        },
+        {
+            title:"1"
+            child:
+        }]
+    */
+
+
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <a href="http://www.miaov.com" class="logo"></a>
+        <div class="tree"  id="list">
+            <!--<ul>
+                  <li>
+                    <span class="line">第一集菜单</span>
+                    <ul style="display: block;">
+                        <li><span>第二集菜单</span></li>
+                        <li><span>第二集菜单</span></li>
+                        <li>
+                            <span class="line">第二集菜单</span>
+                            <ul style="display: block;">
+                                <li><span>第三集菜单</span></li>
+                                <li><span>第三集菜单</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> 
+            </ul> -->
+        </div>
+    </div>
+    <script>
+        var arr = [{
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一集菜单"
+    }];
+        var main = document.getElementsByClassName("main")[0];
+            console.log(main);
+        function render(data){
+            var html= "<ul>";               
+            data.forEach(function(item){
+                html += `<li>                           
+                             <span class="line">${item.title}</span>`;
+                            if(item.child){
+                                html+= render(item.child);
+                        }
+                            `
+                        </li>`;
+            });
+            html+= "</ul>";
+            return html;
+        }
+        render(arr);
+        main.innerHTML =render(arr);
+
+
+
+
+        var list = document.getElementsByTagName("ul")[0];
+        lis = list.children;//list下的自己li；
+        var spans = list.querySelectorAll("span");
+        var uls = list.querySelectorAll("ul");
+ //初始化；将ul下所有ul的隐藏,所有的span下面如果有兄弟元素ul就把span前面的小图标变为“+”，没有兄弟元素前面就没有小图标；
+        for(var i = 0;i<spans.length;i++){
+        	if( spans[i].nextElementSibling){
+        		spans[i].className = "add";
+        	}
+            else{
+            	spans[i].className = "";
+            }
+
+        }
+
+       	for(var i = 0;i<spans.length;i++){
+       		spans[i].isClick = false;//默认span的点击状态是false；
+       		spans[i].index = i;
+       		spans[i].onclick = function(){
+
+       			var spanss = this.parentNode.parentNode.querySelectorAll("span");//点击span时，span的父级的父级下的span；
+		       	var ulss = this.parentNode.parentNode.querySelectorAll("ul");//点击ulss时，span的父级的父级下的ulss；
+
+		       	//点击时先把当前点击的span的父级的父级下的span前面的小图标变为“+”；
+       			for(var i = 0;i<spanss.length;i++){
+	       			if(spanss[i].nextElementSibling){
+	       				spanss[i].className= "add";
+	       			}
+	       		}
+	       		//点击时先把当前点击的span的父级的父级下的ul隐藏；
+	       		for(var i = 0;i<ulss.length;i++){
+	       			ulss[i].style.display = "none";
+	       		}
+
+               if(!this.nextElementSibling){
+                    return;
+                }
+
+       			if(!this.isClick){ //点击状态是false；
+
+       				//点击span时将所有的span的点击状态设为false；
+       				for(var i =0;i<spans.length;i++){
+	       				spans[i].isClick = false;
+	       			}
+
+       				this.className = "line";//span 前面的小图标设为"-";
+	       			this.nextElementSibling.style.display = "block";//下面的兄弟元素ul显示；
+	       			this.isClick = true;//点击状态设为true；
+	       			
+	       		}else{
+	       			//如果点击的这个span的下面还有展开的菜单，将下面所有展开的span前面的小图标变为"+"，ul隐藏
+	       			this.className = "add";
+		       		this.nextElementSibling.style.display = "none";  
+		       		this.isClick = false;//将点击状态设为false；
+		       	}
+       		}       		
+
+       	} 
+       
+
+       	
+    </script>
+</body>
+
+</html>

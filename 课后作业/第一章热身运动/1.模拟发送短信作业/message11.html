@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>message11</title>
+<style>
+ul,li{
+	list-style:none;
+}
+.fl{
+	float:left;	
+}
+.fr{
+	float:right;
+}
+.clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.clearfix{
+	zoom:1;	
+}
+.box{
+	width:400px;
+	height:700px;
+	background:#eee;
+	padding:10px 50px 0 50px;
+	margin:0 auto;
+	border-radius:30px;
+	}
+.red{
+	height:40px;
+	line-height:40px;
+	background:red;
+	margin-bottom:20px;
+	float:left;
+	}
+.green{
+	height:40px;
+	line-height:40px;
+	background:green;
+	margin-bottom:20px;
+	float:right;
+	}
+#list{
+	width:300px;
+	height:600px;
+	margin:20px auto;
+	background:#fff;
+	overflow:auto;
+	border-radius:10px;
+	}
+</style>
+</head>
+
+<body>
+<div class="box">
+<img src="images/pic1.png" id="img"/>
+<input id="text" placeholder="写点什么吧~~"/>
+<input type ="button" id="send" value="发送"/>
+<ul id="list">
+<!--<li class="red"><img src="images/pic1.png"/>hello</li>
+<li class="green">hello<img src="images/pic1.png"/></li>-->
+<script>
+	var img = document.getElementById("img");
+	var text = document.getElementById("text");
+	var send = document.getElementById("send");
+	var imgState = true;
+	img.onclick = function(){
+		if(imgState){
+			img.src="images/pic2.png";
+			imgState = false;
+		}else{
+			img.src="images/pic1.png";
+			imgState = true;	
+			}
+		}
+	send.onclick = function(){
+		if(text.value == ""){
+			alert("亲，写点东西吧~~");
+		}else{
+			if(imgState){
+			list.innerHTML += '<li class="clearfix"><div class="red"><img src="images/pic1.png"/>' + text.value + '</li></div>';	
+			text.value = "";
+			}
+			else{
+			list.innerHTML += '<li class="clearfix"><div class="green">' + text.value + '<img src="images/pic2.png"/>' + '</li></div>';	
+			text.value = "";	
+				}	
+			}
+		}
+</script>
+</ul>
+</div>
+</body>
+</html>

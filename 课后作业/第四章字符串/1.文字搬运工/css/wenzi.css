@@ -1,0 +1,42 @@
+.bg{
+	width: 1200px;
+	height: 489px;
+	background: url(../images/bg1.png);
+	padding-top: 211px;
+	position: relative;
+}
+.left{
+	width: 265px;
+	height: 388px;
+	background: #fff;
+	margin-left: 204px;
+	color: #402196;
+	padding: 0 39px 0 24px;
+	font-size: 14px;
+	line-height: 30px;
+}
+.btn{
+	width: 100px;
+	height: 33px;
+	background: #7ee4fd url(../images/001.png) no-repeat 34px 16px;
+	color: #fff;
+	padding-top: 47px;
+	text-align: center;
+	margin: 136px 18px 20px 18px;
+}
+.right{
+	width: 265px;
+	height: 388px;
+	background: #fff;
+	color: #402196;
+	padding: 0 39px 0 24px;
+	font-size: 14px;
+	line-height: 30px;
+}
+.xianshi{
+	position: absolute;
+	left: 590px;
+	top: 445px;
+	color: #7ee4fd;
+	font-size: 14px;
+}

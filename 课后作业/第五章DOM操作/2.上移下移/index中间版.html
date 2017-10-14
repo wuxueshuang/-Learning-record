@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/utils.js"></script>
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>-->
+</section>
+	<script>
+		var wrapLeft = $(".wrap-left")[0];
+		
+		var list = $(".list")[0];
+		//var downBtns = $(".down",wrapLeft);
+
+		var lis = $("li",wrapLeft);//需要移动的li集合;
+		/*var arrLis = Array.from(lis);*/
+		//console.log(downBtns);
+		
+		function moveDownForLi(){
+
+			var downBtns = $(".down",wrapLeft);
+
+			for(var i = 0;i<downBtns.length;i++){
+
+				downBtns[i].index = i;
+				downBtns[i].onclick = function(){
+					var that = this;
+					parent = this.parentNode.parentNode;
+					liHeight = parent.offsetHeight+10;
+
+					if(parent.nextElementSibling){
+						mTween(parent.nextElementSibling,{top:(that.index)*liHeight},500,"linear");
+						mTween(parent,{top:(that.index+1)*liHeight},500,"linear");
+					    list.insertBefore(that.parentNode.parentNode.nextElementSibling,that.parentNode.parentNode);
+					}
+
+
+					if(this.index==4){
+						
+						for(var j=0; j<downBtns.length-1; j++){
+							(function(func){
+								mTween(downBtns[func].parentNode.parentNode,{top:(func+1)*liHeight},200,'linear');
+							})(j);	
+							
+						}
+						mTween(parent,{top:0},500,"linear");
+						list.insertBefore(parent,list.firstElementChild);
+						
+					}
+					
+					
+					moveDownForLi();	
+				}
+
+				
+			}
+
+			
+		}
+		moveDownForLi();
+
+
+		function moveUpForLi(){
+			var upBtns = $(".up",wrapLeft);
+
+			for(var i = 0;i<upBtns.length;i++){
+				upBtns[i].index = i;
+				upBtns[i].onclick = function(){
+					console.log(parent.previousElementSibling);
+					var that = this;
+					parent = this.parentNode.parentNode;
+					liHeight = parent.offsetHeight+10;
+					if(parent.previousElementSibling){
+						console.log(parent,this.index);
+						mTween(parent.previousElementSibling,{top:(that.index)*liHeight},500,"linear");
+						mTween(parent,{top:(that.index-1)*liHeight},500,"linear");
+					    list.insertBefore(that.parentNode.parentNode,that.parentNode.parentNode.previousElementSibling);
+					}
+					if(this.index==0){
+						
+						for(var j=1; j<=upBtns.length-1; j++){
+							(function(func){
+								mTween(upBtns[func].parentNode.parentNode,{top:(func-1)*liHeight},200,'linear');
+							})(j);	
+							
+						}
+						mTween(parent,{top:liHeight*4},500,"linear");
+						list.appendChild(parent);
+						
+					}
+					moveUpForLi();
+				}
+			}
+
+		}
+
+		moveUpForLi();
+	</script>
+</body>
+</html>

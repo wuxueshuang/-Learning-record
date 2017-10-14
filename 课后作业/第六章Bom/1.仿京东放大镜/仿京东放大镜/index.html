@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.wrap{
+				width: 900px;
+				height: 500px;
+				background: url(img/wrap.png) no-repeat;
+				margin: 50px auto;
+				position: relative;
+			}
+			.box{
+				width: 337px;
+				height: 189px;
+				position: absolute;
+				top: 155px;
+				left: 148px;
+			}
+			.box img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.mask{
+				width: 149px;
+				height: 149px;
+				background: #FFFFFF;
+				border-radius: 50%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 0.5;
+				-display: none;
+			}
+			.rBox{
+				width: 182px;
+				height: 182px;
+				border-radius: 50%;
+				overflow: hidden;
+				position: absolute;
+				top: 159px;
+				right: 131px;
+			}
+			.rBox img{
+				width: 674px;
+				height: 378px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="box">
+				<img src="img/pic.png" />
+				<div class="mask"></div>
+			</div>
+			<div class="rBox">
+				<img src="img/pic.png" />
+			</div>
+		</div>
+		<script src="utils.js"></script>
+		<script>
+			var mask = $(".mask")[0];
+			var box = $(".box")[0];
+			var leftImg = $("img",box);
+			var rBox = $(".rBox")[0];
+			var rightImg = $("img",rBox)[0];
+
+			//鼠标移动时遮罩层到图像左边的距离disX=鼠标按下没有移动时的clientX - 遮罩层到图像左边的距离；
+			//鼠标移动时遮罩层左边到图像左边的距离 = clinetX - disX;
+			mask.onmousedown = function(ev){
+				var disX = ev.clientX - mask.offsetLeft;
+				var disY = ev.clientY - mask.offsetTop;
+				var maxX = box.offsetWidth-mask.offsetWidth;
+				var maxY = box.offsetHeight-mask.offsetHeight;
+				//右边可视区可走的最大距离：
+				var maxX_right = rBox.offsetWidth-rightImg.offsetWidth;
+				var maxY_right = rBox.offsetHeight-rightImg.offsetHeight;
+				var l=null;
+				var t = null;
+				mask.onmousemove = function(ev){
+					//鼠标移动时遮罩的位置：
+					l = ev.clientX - disX;
+					t = ev.clientY - disY;
+					if(l < 0){
+						l = 0;
+					}
+					if(l>maxX){
+						l = maxX;
+					}
+					if(t < 0){
+						t = 0;
+					}
+					if(t > maxY){
+						t = maxY;
+					}
+					mask.style.left =l+"px" ;
+					mask.style.top =t+"px" ;
+					//l/maxX = ll/maxX_right;
+					rightImg.style.left = (l*maxX_right/maxX) + "px";
+
+					rightImg.style.top = (t*maxY_right/maxY)+ "px";
+				}
+				mask.onmouseup = function(){
+					mask.onmousemove = null;
+				}
+			}
+		</script>
+	</body>
+</html>

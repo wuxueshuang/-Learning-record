@@ -1,0 +1,52 @@
+#box{
+	width:492px;
+	height:80px;
+	margin:0  auto;
+	padding:275px 237px 347px 295px;
+	background:url(../images/bg22.png) no-repeat;
+}
+#clock{
+	width:492px;
+	height:80px;
+	position: relative;
+	}
+div{
+	width:492px;
+	height:80px;	
+	position: absolute;
+	top:0;
+	left:0;
+}
+#clock ul{
+	padding:0;
+	margin:0;
+	list-style: none;
+	float:left;
+	width:492px;
+	height:80px;
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+#clock li{
+	position: relative;
+	float:left;
+	width:60px;
+	margin:0;
+	height:100%;
+}
+div{
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#clock .dif{
+	width:58px;
+	overflow: hidden;
+}
+#clock .mar_r{
+	margin-right:5px;
+}

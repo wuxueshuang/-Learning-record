@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>水波纹效果</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <div class='parent'>
+        <div class='slider'>
+            <button type="button" id='right' class='right' name="button">
+
+        <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 477.175 477.175">
+            <g>
+                <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                 ">
+            </g>
+        </svg>
+      </button>
+
+      <button type="button" id='left' class='left' name="button">
+          <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 477.175 477.175">
+              <g>
+                  <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                   c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z">
+              </g>
+          </svg>
+       </button>
+            <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <circle id='circle1' class='circle1 n-width' cx="34px" cy="49%" r="20" />
+                <circle id='circle2' class='circle2 n-width' cx="34px" cy="49%" r="100" />
+                <circle id='circle3' class='circle3 n-width' cx="34px" cy="49%" r="180" />
+                <circle id='circle4' class='circle4 n-width' cx="34px" cy="49%" r="260" />
+                <circle id='circle5' class='circle5 n-width' cx="34px" cy="49%" r="340" />
+                <circle id='circle6' class='circle6 n-width' cx="34px" cy="49%" r="420" />
+                <circle id='circle7' class='circle7 n-width' cx="34px" cy="49%" r="500" />
+                <circle id='circle8' class='circle8 n-width' cx="34px" cy="49%" r="580" />
+                <circle id='circle9' class='circle9 n-width' cx="34px" cy="49%" r="660" />
+            </svg>
+            <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <circle id='circle10' class='circle10 n-width' cx="648px" cy="49%" r="20" />
+                <circle id='circle11' class='circle11 n-width' cx="648px" cy="49%" r="100" />
+                <circle id='circle12' class='circle12 n-width' cx="648px" cy="49%" r="180" />
+                <circle id='circle13' class='circle13 n-width' cx="648px" cy="49%" r="260" />
+                <circle id='circle14' class='circle14 n-width' cx="648px" cy="49%" r="340" />
+                <circle id='circle15' class='circle15 n-width' cx="648px" cy="49%" r="420" />
+                <circle id='circle16' class='circle16 n-width' cx="648px" cy="49%" r="500" />
+                <circle id='circle17' class='circle17 n-width' cx="648px" cy="49%" r="580" />
+                <circle id='circle18' class='circle18 n-width' cx="648px" cy="49%" r="660" />
+            </svg>
+            <div id='showBox1' class='showBox1 up1'></div>
+            <div id='showBox2' class='showBox2'></div>
+            <div id='showBox3' class='showBox3'></div>
+            <div id='showBox4' class='showBox4'></div>
+        </div>
+    </div>
+    <script>
+        /*
+            需求分析：
+                1.点击左右按钮切换上下张图片；
+                2.切换图片过程中，图片放大,展示水波纹效果；水波纹效果消失后图片大小还原，切换到下一张图片;
+
+            思路：
+                利用层级关系，显示隐藏图片；
+                层级关系：
+                    图片< svg < 按钮
+        */
+        var curpage = 0;//当前显示的图片
+        var left = document.getElementById('left');
+        var right = document.getElementById('right');
+        var pageNum = 'showBox';
+        var transitionC = 'circle';//圆
+        var rightSvg = true;//要运动的圆的圆心位置，默认是在右边
+        var svg1 = document.getElementById("svg1");
+        var svg2 = document.getElementById("svg2");
+
+
+        function leftFn(){
+            svg1.classList.remove("up2");
+            svg2.classList.add("up2");
+            rightSvg = false;//运动圆心在左边的圆
+            if( curpage==0 ){
+                curpage = 4;
+            }            
+            curpage--;
+            
+            for( let i = 1; i <= 4; i++ ){
+                let  show = document.getElementById(pageNum + i);//获取到每个显示图片的盒子
+                show.classList.add("tran");//控制图片大小，将图片放大到1.3倍
+              }   
+            setTimeout(moveFn,200);
+            setTimeout(function(){
+                for( let i = 1; i <= 4; i++ ){
+                    let  show = document.getElementById(pageNum + i);//获取到每个显示图片的盒子
+                    show.classList.remove("tran");//将图片还原到原来的大小
+                } 
+            },2000)
+        }
+        
+        //实现波纹荡漾效果
+        function moveFn(){
+            if(!rightSvg){//圆心在左边
+                for( var i = 1; i <=9 ; i++ ){
+                   var moveC = document.getElementById(transitionC + i);//获取到圆心在右边的圆; 
+                   moveC.classList.remove("n-width");//n-width设置圆的边框宽度为0
+                   moveC.classList.add("addwidth");//将圆的边框设置为82px;
+                }
+                setTimeout(function(){
+                    for( var i = 1; i <=9 ; i++ ){
+                       var moveC = document.getElementById(transitionC + i);//获取到圆心在右边的圆; 
+                       moveC.classList.add("n-width");//n-width设置圆的边框宽度为0
+                       moveC.classList.remove("addwidth");//将圆的边框设置为82px;
+                    }
+                },1200)
+            }else{
+                for( var i = 10; i <=18 ; i++ ){
+                   var moveC = document.getElementById(transitionC + i);//获取到圆心在右边的圆; 
+                   moveC.classList.remove("n-width");//n-width设置圆的边框宽度为0
+                   moveC.classList.add("addwidth");//将圆的边框设置为82px;
+                }
+                setTimeout(function(){
+                    for( var i = 10; i <=18 ; i++ ){
+                       var moveC = document.getElementById(transitionC + i);//获取到圆心在右边的圆; 
+                       moveC.classList.add("n-width");//n-width设置圆的边框宽度为0
+                       moveC.classList.remove("addwidth");//将圆的边框设置为82px;
+                    }
+                },1200)
+            }
+
+            for( var i = 1; i<= 4;i++){
+                //console.log(curpage);
+                if(i == curpage){
+                    let  show = document.getElementById(pageNum + i);//获取当前显示图片的盒子
+                    show.classList.add("up1");//当前显示图片的盒子添加class名提升层级
+                }else{
+                    let  showB = document.getElementById(pageNum + i);//未显示的图片盒子
+                    showB.classList.remove("up1");//未显示图片的盒子删除class名
+                }
+            }
+        }
+
+        function rightFn(){
+            svg1.classList.add("up2");
+            svg2.classList.remove("up2");
+            rightSvg = true;//运动圆心在左边的圆            
+            curpage++;
+            if( curpage==4 ){
+                curpage = 0;
+            }
+            for( let i = 1; i <= 4; i++ ){
+                let  show = document.getElementById(pageNum + i);//获取到每个显示图片的盒子
+                show.classList.add("tran");//控制图片大小，将图片放大到1.3倍
+              }   
+            setTimeout(moveFn,200);
+            setTimeout(function(){
+                for( let i = 1; i <= 4; i++ ){
+                    let  show = document.getElementById(pageNum + i);//获取到每个显示图片的盒子
+                    show.classList.remove("tran");//将图片还原到原来的大小
+                }                
+            },2000)
+        }
+        setTimeout(function(){
+            rightFn();
+        },1000);
+
+        //点击左边按钮
+        left.onmousedown = leftFn;
+
+        //点击右边按钮
+        right.onmousedown = rightFn;
+
+        //键盘事件
+        document.onkeydown = (ev) => {
+            if (ev.keyCode == 37) {
+                leftFn();
+            } else if (ev.keyCode == 39) {
+                rightFn();
+            }
+        }
+    </script>
+</body>
+
+</html>

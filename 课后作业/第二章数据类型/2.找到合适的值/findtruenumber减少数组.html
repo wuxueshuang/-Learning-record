@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="css/reset.css"/>       
+		<link rel="stylesheet" href="css/findtruenumber.css"/>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="box">
+				<div class="innerbox">
+					<div class="content">
+						var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];
+					</div>
+					<ul class="list">
+						<li class="yellow">
+							<span class="fl">1</span>
+							<p class="request fl">找到arr里所有的数字：<i></i></p>
+							<button>开始查找</button>
+						</li>
+						<li class="blue">
+							<span class="fl">2</span>
+							<p class="request fl">找到可以转成数字的：<i></i></p>
+						</li>
+						<li class="pink">
+							<span class="fl">3</span>
+							<p class="request fl">把转成数字以后，最大值判断出来：<i></i></p>
+						</li>
+						<li class="orange">
+							<span class="fl">4</span>
+							<p class="request fl">把 NaN 所在的位置找出来：<i></i></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="js/findtruenumber.js"></script>
+	</body>
+</html>

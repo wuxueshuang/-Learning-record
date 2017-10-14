@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/utils.js"></script>
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>-->
+</section>
+	<script src = "js/utils.js"></script>
+	<script>
+		var list = $(".list")[0];
+		moveLi();
+		function moveLi(){
+			var lis = document.getElementsByTagName("li");
+			var upsBtns = $(".up");//上移按钮
+			var downsBtns = $(".down");//下移按钮
+			var liHeight = 62;
+			//循环每一个上移按钮；操作对应的父级的父级。li；
+			for(var i = 0;i<upsBtns.length;i++){
+				
+				upsBtns[i].index = i;
+				upsBtns[i].onclick = function(){
+					parent = this.parentNode.parentNode;//点击按钮所对应的li;
+					//如果点击的按钮父级li有有上一个兄弟
+					if(parent.previousElementSibling){
+						mTween(parent,{top:(this.index-1)*62},200,"linear");//将自己的父级li移动到上一个兄弟元素的位置；
+						mTween(parent.previousElementSibling,{top:this.index*62},200,"linear");//将上一个兄弟元素移动到自己位置；
+						list.insertBefore(parent,parent.previousElementSibling);//将自己的父级插入到自己上一个兄弟元素的前面，改变结构；
+					}else{//自己的父级元素没有上一个兄弟元素，即当前点击的父级元素为第一个li，下标为“0”；
+						mTween(parent,{top:(upsBtns.length-1)*62},200,"linear");//将自己的父级li移动最后一个li的位置；
+						for( var i = 1; i < upsBtns.length; i++ ){//循环移动除去第一个之外所有的li,相对于自己的位置上移一个单位的高度；
+							//upsBtns[i].index = i;
+							mTween(lis[i],{top:(upsBtns[i].index-1)*62},200,"linear");
+							
+						}
+						list.appendChild(parent);
+
+					}
+					moveLi();
+				}
+			}
+			for(var i = 0;i<downsBtns.length;i++){
+				downsBtns[i].index = i;
+				downsBtns[i].onclick = function(){
+					parent = this.parentNode.parentNode;//点击按钮所对应的li;
+					//如果点击的按钮父级li有下一个兄弟
+					if(parent.nextElementSibling){
+						mTween(parent,{top:(this.index+1)*62},200,"linear");//将自己的父级li移动到下一个兄弟元素的位置；
+						mTween(parent.nextElementSibling,{top:this.index*62},200,"linear");//将下一个兄弟元素移动到自己位置；
+						list.insertBefore(parent.nextElementSibling,parent);//将自己的父级的下一个兄弟元素插入到自己前面，改变结构；
+					}else{
+						//自己的父级没有下一个兄弟元素；即自己的父级li为最后一个元素；下标为【upsBtns.length-1】
+						for( var i = 0; i <downsBtns.length-1 ; i++ ){//循环除了最后一个元素之外的所有元素，相对于自己的位置下移一个单位的高度；
+							downsBtns[i].index = i;
+							mTween(lis[i],{top:(downsBtns[i].index+1)*62},200,"linear");
+						}
+						mTween(parent,{top:(0)*62},200,"linear");//将自己的父级li移动第一个li的位置；
+						list.insertBefore(parent,list.firstElementChild);
+					}
+					moveLi();					
+				}
+
+			}
+				
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+
+				margin:0;
+				padding:0;				
+				box-sizing:border-box;
+			}
+			.list{
+				width:400px;
+				height:40px;
+				transform-style:preserve-3d;
+			}
+			.list li{
+				position:absolute;
+				top:0;
+				list-style:none;
+				width:25%;
+				height:40px;
+				background:red;
+			}
+			.list div,.list span{
+				width:100%;
+				height:40px;
+				position:absolute;
+				top:0;
+				left:0;
+				line-height:40px;
+				text-align:center;
+				border:1px solid #ccc;
+			}
+			.list li div{				
+				background:blue;
+			}
+			.list li span{				
+				background:red;
+				transform:rotateX(90deg);
+			}
+			.list li .positive{
+				transform-origin:50% 50% -25px;
+				transition:all 0.3s ease;
+			}
+			.list li .back{
+				transform-origin:50% 50% -50px;
+				transition:all 0.3s ease;
+			}
+			.list li:hover .positive{
+				transform:rotateX(-90deg);
+			}
+
+			.list li:hover .back{
+				transform:rotateX(0);
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box">
+			<ul class="list">
+				<li>
+					<div class="positive">123</div>
+					<span class="back">123</span>
+				</li>
+				<li>
+					<div class="positive">456</div>
+					<span class="back">456</span>
+				</li>
+				<li>
+					<div class="positive">789</div>
+					<span class="back">789</span>
+				</li>
+				<li>
+					<div class="positive">012</div>
+					<span class="back">012</span>
+				</li>
+			</ul>
+		</div>
+		<script>
+			var list = document.getElementsByClassName("list")[0];
+			var lis = list.getElementsByTagName("li");
+			console.log(lis);
+			for( var i = 0; i < lis.length; i++ ){
+				lis[i].style.left = 100*i + "px";
+			}
+		</script>
+	</body>
+</html>
