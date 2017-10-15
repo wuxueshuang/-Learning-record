@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>C3结构性选择符</title>
+<style>
+	p,div{
+		height:30px;
+		border:1px solid #6F6;
+		}
+	div{
+		margin:10px 0;
+		}
+	p:nth-child(3){
+		background:#FC3;
+		}
+	body *:nth-child(2){/*body 下的第二个子元素*/
+		background:#FC3;
+		}	
+		
+	//p:nth-last-child(1){
+		background:#336;
+		}
+	//p:nth-child(2n){
+		background:#FC3;
+		}
+	//p:nth-child(2n+1){
+		background:#336;
+		}
+	//p:nth-of-type(2){
+		background:#FC3;
+		}
+</style>
+</head>
+
+
+<body>
+<p>p1</p>
+<div>div1</div>
+<p>p2</p>
+<div>div2</div>
+<div>div1</div>
+<p>p3</p>
+<div>div3</div>
+<div>div4</div>
+<p>p4</p>
+<p>p5</p>
+<p>p6</p>
+<div>div5</div>
+<p>p7</p>
+<div>div6</div>
+</body>
+</html>
