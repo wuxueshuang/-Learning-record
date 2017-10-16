@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				switch(变量){
+					case值：
+						执行的代码
+						[break;]
+					case值：
+						执行的代码
+						[break;]
+					case值：
+						执行的代码
+						[break;]
+					default:
+						执行的代码
+				}
+
+				一个变量有多种情况判断的时候要执行不同代码，可以选择switch语句，switch对准的是一个变量；条件针对的是不同变量的条件要使用if，else
+			*/
+		</script>
+	</head>
+
+	<body>
+	<script>
+		document.onkeydown = function (ev){
+				let  key = ev.keyCode;
+			/*	switch (key){
+					case 37:
+					console.log(37);
+					break;
+					case 38:
+					console.log(38);
+					break;
+					case 39:
+					console.log(39);
+					break;
+					case 40:
+					console.log(40);
+					break;
+					default:
+						console.log("其余的键");
+				}*/
+
+				switch (key){
+					case 37：
+					case 38:
+					console.log("37"+"38");//合并37 38 执行的代码
+					break;
+					case 39:
+					console.log(39);
+					break;
+					case 40:
+					console.log(40);
+					break;
+					default:
+						console.log("其余的键");
+				}
+
+				if(key==37){
+
+				}else if(key==38){
+
+				}else if(key==39){
+
+				}else if(key==40){
+
+				}else{
+
+				}
+
+		}
+	</script>
+	</body>
+</html>

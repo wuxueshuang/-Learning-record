@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+					label语句
+					标记语句（labeled statement）可以和 break 或 continue 语句一起使用。标记就是在一条语句前面加个可以引用的标识符（identifier）。
+			*/
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*for( var i = 0; i < 10; i++ ){
+				console.log(i);
+				for( var j = 0; j < 500; j+=100 ){
+					console.log(j);
+					if(j==200){
+						break;
+					}
+				}
+			}*/
+
+			abc:
+			for( var i = 0; i < 10; i++ ){
+				console.log(i);
+				for( var j = 0; j < 500; j+=100 ){
+					console.log(j);
+					if(j==200){
+						break;// 0 0 100 200 1 1  100 200 2 2 100 ... 9 9 100 200
+						//break abc;//0 0 100 200
+					}
+				}
+			}
+			
+			
+		
+		</script>
+	</body>
+</html>
