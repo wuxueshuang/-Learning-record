@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function unique(arr){
+				var res = [arr[0]];
+				for(var i=1; i<arr.length; i++){
+					var repeat = false;
+					for(var j=0; j<res.length; j++){
+						if(arr[i] === res[j]){
+							repeat = true;
+							break;
+						}
+					}
+					if(!repeat){
+						res.push(arr[i]);
+					}
+				}
+				return res;
+			}
+			
+			function unique2(arr){
+				var arr2 = arr.sort();
+				var res = [arr2[0]];
+				for(var i=1; i<arr2.length; i++){
+					if(arr2[i] !== res[res.length-1]){
+						res.push(arr2[i]);
+					}
+				}
+				return res;
+			}
+			
+			function unique3(arr){
+				var res = [];
+				var obj = {};
+				for(var i=0; i<arr.length; i++){
+					if( !obj[arr[i]] ){
+						obj[arr[i]] = 1;
+						res.push(arr[i]);
+					}
+				}
+				return res;
+			}
+
+			function unique4(arr){
+				var res = [];
+				for(var i=0; i<arr.length; i++){
+					if(res.indexOf(arr[i]) == -1){
+						res.push(arr[i]);
+					}
+				}
+				return res;
+			}
+
+			function unique5(arr){
+				var res = [];
+				for(var i=0; i<arr.length; i++){
+					if( !res.includes(arr[i]) ){ // 如果res新数组包含当前循环item
+						res.push(arr[i]);
+					}
+				}
+				return res;
+			}
+
+			function unique6(arr){
+				var res = [];
+				res = arr.filter(function(item){
+					return res.includes(item) ? '' : res.push(item);
+				});
+				return res;
+			}
+
+			function unique7(arr){
+				var res = [];
+				arr.forEach(function(item){
+					res.includes(item) ? '' : res.push(item);
+				});
+				return res;
+			}
+			
+			function unique8(arr){
+				var i,j;
+				len = arr.length;
+				for(i = 0; i < len; i++){
+					for(j = i + 1; j < len; j++){
+						if(arr[i] == arr[j]){
+							arr.splice(j,1);
+							len--;
+							j--;
+						}
+					}
+				}
+				return arr;
+			}
+			
+			function unique9(arr){
+				var res = [];
+				for(var i=0; i<arr.length; i++){
+					res.lastIndexOf(arr[i]) !== -1 ? '' : res.push(arr[i]);
+				}
+				return res;
+			}
+			
+			function unique10(arr){
+			//Set数据结构，它类似于数组，其成员的值都是唯一的
+				return Array.from(new Set(arr)); // 利用Array.from将Set结构转换成数组
+			}
+				
+				
+
+			console.log(unique2(arr))
+		</script>
+		
+	</body>
+</html>
