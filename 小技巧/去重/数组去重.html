@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			var arr = [2,5,6,9,8,8,8,5,5,7,2,1,0,3,6,2,0];
+			/*
+			//第一种方法：
+			var newArr = [arr[0]];
+			for(var i = 0;i<arr.length;i++){
+				for(var j = 0;j<newArr.length;j++){
+					var state = "noRepeat";//在循环的时候设置一个状态，默认是“noRepeat"，表示不重复
+					if(arr[i]===newArr[j]){//说明已经存在了，没有必要在继续循环比较下去；将状态改为repeat；
+						state = "repeat";
+						break;
+					}
+				}
+				//在内层for循环结束之后如果状态还是noRepeat，说名新数组中没有存过这个值，将这个值push到newArr中;
+				if(state =="noRepeat"){
+					newArr.push(arr[i]);
+				}
+			}
+			console.log(newArr);*/
+			
+
+			//第二种方法：
+			/*var newArr = [arr[0]];
+			for(var i = 0;i< arr.length;i++){
+				if(newArr.indexOf(arr[i])===-1){
+					newArr.push(arr[i]);
+				}
+			}
+			console.log(newArr);*/
+
+
+			//第三种方法：
+			var newArr = [];//声明一个空数组；
+			var obj = {};
+			for(var i = 0;i< arr.length;i++){
+				if(!obj[arr[i]]){//走进来说明，对象的key值不存在；
+					newArr.push(arr[i]);
+					obj[arr[i]]= true;//将对象的这个属性变成true；
+				}
+
+			}
+			console.log(newArr);
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
