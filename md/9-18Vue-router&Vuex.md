@@ -203,7 +203,7 @@ Vue.use(VueRouter)
 	    }
 	  }
 	</script>
-####index.js
+####store下的index.js
 	import Vue from 'vue' // 引入vue文件直接写名字会在node_modules下找
 	
 	import Vuex from 'vuex'// 引入vueX
