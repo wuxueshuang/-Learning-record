@@ -31,11 +31,13 @@ const musicApi = require("./api/music.js");//将api文件夹下的music接口文
 const booksApi = require("./api/books.js");//将api文件夹下的book接口文件引入进来;图书请求接口
 const movieApi = require("./api/movie.js");//将api文件夹下的book接口文件引入进来;图书请求接口
 const findApi = require("./api/find.js");//将api文件夹下的find接口文件引入进来;图书请求接口
+const comunityApi = require("./api/comunity.js");//将api文件夹下的find接口文件引入进来;图书请求接口
 app.use('/api',userApi);//中间件
 app.use('/api',musicApi);//中间件musicApi
 app.use('/api',booksApi);//中间件booksApi
 app.use('/api',movieApi);//中间件movieApi
-app.use('/api',findApi);//中间件findeApi
+app.use('/api',comunityApi);//中间件comunityApi
+
 
 
 

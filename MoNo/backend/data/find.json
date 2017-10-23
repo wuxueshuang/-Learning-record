@@ -1,6 +1,6 @@
 {	
-	"Carousel figure":["img.f1-001.png","img.f1-002.png","img.f1-003.png"],//轮播图
-	"Theme":["img/theme001.png","img/theme002.png","img/theme003.png","img/theme004.png","img/theme005.png","img/theme006.png"],//主题分类
+	"Carousel figure":["img.f1-001.png","img.f1-002.png","img.f1-003.png"],
+	"Theme":["img/theme001.png","img/theme002.png","img/theme003.png","img/theme004.png","img/theme005.png","img/theme006.png"],
 	"Recommend":[
 		{
 			"title":"火星实验室",
