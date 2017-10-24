@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    	body{
+    		background:skyblue;
+    	}
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      .pic{
+      	width: 240px;
+        box-shadow:0 1px 3px rgba(0,0,0,.3);
+        overflow:hidden;
+        margin-top:10px;
+      }
+      img{
+      	width: 240px;
+        border: none;
+        display: block;
+      }
+      ul{
+        list-style: none;
+        margin: 0 auto;
+        /*border:1px solid #000;*/
+        width:1050px;
+        overflow: hidden;
+      }
+      li{
+        /*position: absolute;*/
+        border: 1px solid #ccc;
+        float: left;
+        margin: 8px;
+        width: 240px;
+      }
+      div {
+		width: 100%;
+		text-align: center;
+		font-size: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="ul">
+    	<li>
+          <!--<div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>
+          <div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+        <li>
+          <!--<div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+         <li>
+          <!--<div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+         <li>
+          <!--<div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+    </ul>
+    <img src="" id="lodingImg">
+    <div id="loding">loding</div>
+  <script src="jquery-3.2.0.js"></script>
+<script type="text/javascript">
+
+
+
+
+	
+	//http://www.wookmark.com/api/json/popular?callback=?
+	let url = 'http://mce.meilishuo.com/jsonp/get/3?&offset=0&frame=1&trace=0&limit=10&endId=0&pid=78492'
+
+
+	/*let Img = new Image();  // 预加载一些图片
+
+	Img.src = 'http://s3.mogucdn.com/p2/170814/upload_0kghailh3634k3a8i1gcic6d6ie2g_1600x2250.jpg_640x999.webp'
+
+	Img.onload  =function (){
+		setTimeout(function (){
+			lodingImg.src= Img.src;		
+		},5000)
+	}	*/
+
+	let lis = $('#ul li');
+	let firstLi = lis.eq(0);
+
+	let arr = ['item_pc_img','item_region_img','image']
+
+	$.ajax({
+		url: url,
+		dataType: 'jsonp',
+		data:{
+			page: 3
+		},
+		success(data){
+			console.log(data.data.list);
+			data.data.list.forEach((item) => {
+				
+				let Img = new Image();
+
+				Img.onload = function (){
+
+					let div = $(`<div class="pic">
+			            <img src="./timg.gif">
+			          </div>`);
+
+					lis.eq(minIndex()).append(div);
+					let imgs = div.find('img');
+
+					//div.height(Img.height)
+
+					if(isView(imgs[0])){
+						imgs.prop('src',Img.src)
+					}else{
+						imgs.attr('_src',Img.src)
+					}
+						
+				}
+				let srcs = item[arr[Math.round(Math.random()*2)]];
+				Img.style.width = '240px';
+				Img.src = srcs;
+
+				
+			});
+		}
+	})
+
+
+	function isView(element){
+		return Math.abs(element.getBoundingClientRect().top) < document.documentElement.clientHeight;
+	}
+
+	// 判断哪个li最低  返回下标
+	console.log(minIndex());
+	function minIndex(){
+		let arr = [];
+		lis.each(function (index,item){
+			arr.push(item.scrollHeight)
+		});
+
+		let min = Math.min(...arr);  // 已经找到最小的scroHeight
+
+
+		return arr.findIndex((item)=>item === min);
+	}
+
+
+
+	$(window).on('scroll resize',function (){
+		let imgs = $('#ul img');
+
+		imgs.each(function (index,item){
+			let _src = $(item).attr("_src");
+			if(_src){
+				setTimeout(function (){
+					$(item).prop('src',_src);
+				},3000)
+				$(item).removeAttr("_src")
+			}
+		})
+
+	})
+
+	$(window).on('scroll',function (){
+
+		// 继续加载
+
+	})
+	
+	
+</script>
+</body>
+</html>

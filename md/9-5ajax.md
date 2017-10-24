@@ -472,3 +472,92 @@
 				);
 			}
 		</script>
+
+
+#ajax请求：
+
+>AJAX即“Asynchronous Javascript And XML”（异步JavaScript和XML），是指一种创建交互式
+>
+>网页应用的网页开发技术。
+
+> **作用：**
+> 
+> 1. 发送数据和服务器进行交互
+> 	
+> 2. 实现异步更新，不需要刷新整个页面，只做局部更新
+
+##原生ajax实现：
+
+>**html**
+
+> 	<h2>注册get-ajax</h2>
+> 	用户名：<input type="text" name="user" id="username" /><span id="tip"></span>
+> 	<br/>
+> 	密码：<input type="password" name="password" /><br/>
+> 	<input type="button" id="send" value="提交">
+
+>**js代码**
+
+>       send.onclick = function (){
+> 		// 发送请求
+> 		//1 .得到ajax对象
+> 		let xhr = new XMLHttpRequest();
+> 
+> 		// 2. 连接地址，准备好数据
+> 
+> 		xhr.open(
+> 			'GET',
+> 			'http://localhost:8088/backend/php/get.php?user='+username.value,
+> 			true
+> 		);
+> 
+> 		// 怎么拿到响应的信息？
+> 		// 什么时候ajax回来了？
+> 
+> 		//4. 响应回来会触发onload事件
+> 		xhr.onload = function (){
+> 			console.log("我回来了");
+> 			// 回来之后，响应的内容 
+> 			console.log( xhr.responseText );
+> 				
+> 			tip.innerHTML = xhr.responseText;
+> 		}
+> 
+> 		// 3. 发送
+> 		xhr.send();
+> 
+> 	};
+
+##jQuery中ajax实现：
+> **.流程：**
+> 
+> * 1.引入jQuery.js
+> * 2.$ajax步骤：
+> 		$ajax({
+> 			url:"",
+> 			method:"",
+> 			success(data){//请求成功后做的事情
+> 				console.log(data);
+> 			},
+> 			error(error){//错误信息
+> 		       console.log(error);
+> 		    } 
+> 		})
+
+
+
+
+**$ajax实现**
+
+         $.ajax({				                							  		url:"http://192.168.2.81:8888/promise/dress",
+        	success(data){
+        		if(!data){
+                    console.log("暂无数据");
+                }else{
+                    console.log(data); 
+                }
+        	},
+        	error(error){
+                console.log(error);
+            } 
+        });
