@@ -23,7 +23,7 @@
 				}
 			}
 		},		
-		"actionBar":{//操作栏
+		"action-bar":{//操作栏
 			"position": "out",//操作栏位置
 			"fabulous":"580",//点赞数量
 			"comment":"82"//评论数量
@@ -42,7 +42,7 @@
 			"img_title":"忠于自我先于一切",
 			"img_describe":"在布罗茨基年轻时的颓废幻想里，他曾想象着在无法返程时买把手枪死在威尼斯。居伊•德波的最终归宿，就是用一颗子弹…………",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "out",
 			"fabulous":"426",
 			"comment":"6"
@@ -61,7 +61,7 @@
 			"img_title":"忠于自我先于一切",
 			"img_describe":"在布罗茨基年轻时的颓废幻想里，他曾想象着在无法返程时买把手枪死在威尼斯。居伊•德波的最终归宿，就是用一颗子弹…………",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "inner",
 			"fabulous":"334",
 			"comment":"13"
@@ -80,7 +80,7 @@
 			"img_title":"他曾经是受尽歧视的底层华裔，最终用中国水墨经验好莱坞",
 			"img_describe":"无数人都曾被迪士尼动画电影《小鹿斑比》所打动，然而在很长一段时间里，却鲜少有人知道电影中那些美妙的画面，出自…………",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "out",
 			"fabulous":"531",
 			"comment":"13"
@@ -99,7 +99,7 @@
 			"img_title":"他曾经是受尽歧视的底层华裔，最终用中国水墨经验好莱坞",
 			"img_describe":"无数人都曾被迪士尼动画电影《小鹿斑比》所打动，然而在很长一段时间里，却鲜少有人知道电影中那些美妙的画面，出自…………",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "out",
 			"fabulous":"531",
 			"comment":"13"
@@ -118,7 +118,7 @@
 			"img_title":"他曾经是受尽歧视的底层华裔，最终用中国水墨经验好莱坞",
 			"img_describe":"无数人都曾被迪士尼动画电影《小鹿斑比》所打动，然而在很长一段时间里，却鲜少有人知道电影中那些美妙的画面，出自…………",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "out",
 			"fabulous":"136",
 			"comment":""
@@ -137,7 +137,7 @@
 			"img_title":"暗黑视觉系包裹下的清澈女声",
 			"img_describe":"忙碌的巴黎人只需要稍微挤出一点空闲时间，就可以欣赏到这一年出至忙碌的巴黎人只就可就可以欣赏到这一年出至忙碌的巴黎人只就可以欣赏到这一年出至忙碌的巴黎人只需要稍微挤出一点空闲时间，就可以欣赏到这一上几个月甚至…",
 		},		
-		"actionBar":{
+		"action-bar":{
 			"position": "out",
 			"fabulous":"136",
 			"comment":"5"
