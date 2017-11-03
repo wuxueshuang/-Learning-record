@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box{
+				width:100px;
+				height:100px;
+				background:yellow;
+				//animation:3s mine infinite;//引入动画，持续时间，动画名称必填，重复次数：选择填写
+				transition:3s;
+			}
+			{/*.box:hover{
+				background:#f40;
+			}*/}
+
+			//创建动画，
+			@keyframes mine{
+				{/*from {
+					background:green;
+				}
+				to{
+					background:black;
+				}*/}
+				0%{
+					background:green;
+				}
+				20%{
+					background:black;
+				}
+				80%{
+					background:blue;
+				}
+				100%{
+					background:red;
+				}
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<div class = "box"></div>
+	<script>
+		console.log(Math.random()*9 +1);
+	</script>
+	</body>
+</html>
