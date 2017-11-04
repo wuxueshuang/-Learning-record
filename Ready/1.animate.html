@@ -7,13 +7,22 @@
 			.box{
 				width:100px;
 				height:100px;
+				float:right;
 				background:yellow;
+				margin-right:0;
 				//animation:3s mine infinite;//引入动画，持续时间，动画名称必填，重复次数：选择填写
-				transition:3s;
+				//还可以给元素设置transition：
+				{/*transition-property: background,width;//过渡的属性
+				transition-duration: 2s, 5s;*/}
+				//transition: margin-right 4s ease-in-out 1s;
+				//transition:margin-right 5s ease-in-out 1s;
+				transition:all linear 5s;
 			}
-			{/*.box:hover{
+			.box:hover{
 				background:#f40;
-			}*/}
+				width:500px;
+				margin-right:500px;
+			}
 
 			//创建动画，
 			@keyframes mine{

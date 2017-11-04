@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>			
+			.container{
+				width:300px;
+				height:600px;
+				border:1px solid #000;
+				padding:0 300px 0 200px;
+				margin:0 auto;
+			}
+			.same{
+				float:left;
+			}
+			.main{
+				width:100%;
+				height:100%;
+				background:#ccc;
+			}
+			.left{
+				width:200px;
+				height:100%;
+				position:relative;
+				left:-202px;
+				border:1px solid pink;
+				background:yellow;
+				margin-left:-100%;
+			}
+			.right{
+				position:relative;
+				//right:-302px;
+				width:300px;
+				height:100%;
+				border:1px solid pink;
+				background:gray;
+				margin-right:-302px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class = "container">
+			<div class = "main same">MAIN</div>
+			<div class = "left same">LEFT</div>
+			<div class = "right same">RIGHT</div>
+		</div>
+		<script>
+		/*
+			圣杯和双飞翼布局解决的问题都是一样的，就是两边订宽，中间自适应，
+			中间栏要放到文档流前面以优先渲染；
+
+			1.首先把创建一个容器，先添加主体main，在添加left和right，三个块都浮动，全部相对定位，
+				main的宽为容器的100%；
+				左右两边的宽根据实际情况自己设置，
+			2.左边的块先用maigin-left：-100%拉回来，右面的块用margin-right:：-右边块的width拉回来。
+			3.将容器设置一个左右padding使main的内容露出来。
+			4.根据情况调整左右两边块的位置。
+
+		*/
+		</script>
+	</body>
+</html>

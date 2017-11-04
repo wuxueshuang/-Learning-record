@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.HolyGrail{
+				display:flex;
+				min-height:100vh;
+				flex-direction:column;//设置主轴方向Y
+			}
+			header,footer{
+				flex:1;
+				text-align:center;
+				background:#ccc;
+				color:#000;
+				border:1px solid rgb(255,0,255);
+			}
+			.mainContent{
+				display:flex;
+				flex:1;
+			}
+			.HolyGrail-content{
+				flex:1;
+				height:1000px;
+				text-align:center;
+			}
+			.HolyGrail-nav,.HolyGrail-ads{
+				flex:0 0 12em;
+				text-align:center;
+			}
+			.HolyGrail-nav{
+				order:-1;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<div class = "HolyGrail">
+		<header>这是头部</header>
+		<div class = "mainContent">
+			<div class = "HolyGrail-content">content</div>
+			<div class = "HolyGrail-nav">left</div>
+			<div class = "HolyGrail-ads">right</div>
+		</div>
+		<footer>这是底部</footer>
+	</div>
+	<script>
+		
+	</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box{
+				width:800px;
+				height:500px;
+				border:2px solid blue;
+				display:flex;
+				flex-direction:row;//设置主轴方向，
+				justify-content:space-between;//设置主轴多余空间分配：两端对齐
+				flex-wrap:nowrap;//是否换行，默认为不换行，如果内容超出后内容根据实际情况改变大小，盒子外面盒子的大小始终不变。
+			}
+			.same{
+				//flex:auto;
+				flex:1;
+				//width:100px;
+				height:100px;
+				background:yellow;
+				text-align:center;
+				border:1px solid green;
+				//line-heigt:100px;
+				font:50px/100px "宋体";
+
+			}
+			.item3{
+				//order:1;
+			}
+			.item6{
+				order:-1;
+				flex:5;
+			}
+
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class = "box">
+			<div class = "same item1">1</div>
+			<div class = "same">2</div>
+			<div class = "same item3">3</div>
+			<div class = "same">4</div>
+			<div class = "same">5</div>
+			<div class = "same item6">6</div>
+		</div>
+		<script>
+			{/*
+				当使用弹性盒模型中子元素的flex时，需要把所有的子元素都写上flex：1；
+				具体给哪个子元素单独设置不同的份数时，在添加class名，覆盖。
+			*/}
+		</script>
+	</body>
+</html>
