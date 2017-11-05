@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box{
+				width:100px;
+				height:100px;
+				font:40px/100px "宋体";
+				color:yellow;
+				background:blue;
+				position:absolute;
+				top:0;
+				left:0;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id = "box">test1</div>
+		<script>
+			class Drag{
+				constructor(dragbox){
+					this.DragBox = dragbox;
+				}
+				init(){
+					this.DragBox.onmousedown = this.downFn.bind(this);
+				}
+				downFn(ev){
+					console.log(this);
+					this.disX = ev.clientX - this.DragBox.offsetLeft;
+					this.disY = ev.clientY - this.DragBox.offsetTop;
+					document.onmousemove = this.moveFn.bind(this);
+					document.onmouseup = this.upFn.bind(this);
+				}
+				moveFn(ev){
+					this.DragBox.style.left = ev.clientX - this.disX + "px";
+					this.DragBox.style.top = ev.clientY - this.disY + "px";
+				}
+				upFn(){
+					document.onmousemove = document.onmouseup = null;
+				}
+			}
+			let box = document.getElementById("box");
+			let D1 = new Drag(box);
+			D1.init();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box{
+				width:800px;
+				height:500px;
+				border:1px solid #000;
+				display:flex;
+			}
+			.item{
+				margin:auto;
+				border:1px solid pink;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class = "box">
+			<div class = "item">我是测试的div,没有宽高</div>
+		</div>
+		<script>
+			/*
+			实现一个没有订宽高的块水平垂直居中：
+				方法一：
+					应用弹性盒模型:
+					1.给父盒子写display：flex;
+					2.给里面的子元素写margin：auto；
+				方法二：
+					1.给父盒子写相对定位，
+					2.子元素写绝对定位，分别：
+					left:0;
+					top:0;
+					right:0;
+					bottom:0;
+					margin:auto;
+					//但是需要注意的是IE低版本不支持；
+				方法三：
+					1.父盒子中插入一个子元素与要操作居中的元素同级，
+					2.给父盒子写text-align：center;
+					3.插入的元素：
+						width:0;
+						height:100%;
+						vertical-align:middle;
+						display:inline-block;
+					4.要操作的元素：
+						display:inline-block;
+						vertical-align:middle;	
+				方法四：
+				注意此方法只是可以对一个元素实现水平垂直居中，	并不适用本题，本题中遥操作的这个元素没有订宽高；
+					1.给父盒子写相对定位：
+						position：relative；
+					2.给子盒子写：
+						position：absolute；
+						top:50%;
+						left:50%;
+						margin-left:-盒子宽度的一半;
+						margin-top:-盒子高度的一半;
+
+
+			*/
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			class Person{
+				constructor (name,age){
+					this.name = name;
+					this.age = age;
+				}			
+				alertName(){
+					console.log(this.name);
+					//console.log(this.name);
+				}
+			}
+			class Worker extends Person{
+				constructor(name,age,money){
+					super();
+					this.money = money;
+				};
+				alertMoney(){
+					console.log(this.money);
+				}
+
+			}
+			let person1 = new Worker("Lily",30,20000);
+			console.log(person1);
+			person1.alertName();
+			/*person1.alertName("Lily");
+			console.log(person1.alertName);
+			console.log(person1.alertMoney);
+			person1.alertMoney("20000");*/
+		</script>
+	</body>
+</html>

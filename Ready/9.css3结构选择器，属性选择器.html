@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box :nth-child(3){
+				background:red;
+			}
+			div+p{
+				background:yellow;
+			}
+			.div1:first-child{
+				background:green;
+			}
+			.title:nth-of-type(3){
+				color:yellow;
+			}
+			.container>ul{
+				background:blue;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		
+		<div class = "container">
+			<div class = "box">
+				<div class = "div1">div1</div>
+				<div>
+					<span>SPAN</span>
+				</div>
+				<p>p1</p>
+				<h3 class = "title">h3</h3>
+				<h3 class = "title">h3</h3>
+				<p>p2</p>
+				<div>div2</div>
+				<p>p2</p>
+				<h3 class = "title">h3</h3>
+				<ul>
+					<li>2231</li>
+				</ul>
+			</div>
+			<ul>
+				<li>2231</li>
+			</ul>
+		</div>	
+		<script>
+			/*
+				使用结构选择符的时候，我们一般通过子类元素来找父类中符合要求的元素，给这个元素添加样式：
+				需要注意的是结构选择符中的下面两个：
+				//找.item的父级，在父级中找第二个元素，判断类名是否是item;
+				.item:nth-child(2){}
+
+				//找.item的父元素，根据类型将父元素中的标签分类，div一类，p标签一类……;找每一类中的第二个元素判断类名是否是item;
+				.item:nth-of-type(2){}
+
+				.box>ul{}
+				//选中的是.box下的子级ul不包含孙子级的ul；
+				
+			*/
+		</script>
+	</body>
+</html>
