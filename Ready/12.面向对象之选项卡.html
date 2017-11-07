@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box div,#box2 div{
+				width:100px;
+				height:100px;
+				font:50px/100px "宋体";
+				background：yellow;
+				display:none;
+			}
+			.active{
+				background:blue;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div  id = "box">
+            <input type = "button" value = "按钮1" class="active"/>
+            <input type = "button" value = "按钮2"/>
+            <input type = "button" value = "按钮3"/>
+            <div style = "display:block">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div  id = "box2">
+            <input type = "button" value = "按钮1" class="active"/>
+            <input type = "button" value = "按钮2"/>
+            <input type = "button" value = "按钮3"/>
+            <div style = "display:block">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <script>
+        	//创建一个构造函数，一般作为构造函数的函数首字母大写，通过给函数传参来创建实例
+	        function Tab(parent){
+	        	this.inputs = parent.querySelectorAll("input");
+	        	this.divs = parent.querySelectorAll("div");
+	        	this.n = 0;
+	        }
+
+	        Tab.prototype.init = function(){//构造函数的启动入口
+	        	let that = this;
+	        	for( let i = 0; i < this.inputs.length; i++ ){
+	        		this.inputs[i].onclick = function(){
+	        			for( var j = 0; j < that.inputs.length; j++ ){
+	        				that.inputs[j].className = "";
+	        				that.divs[j].style.display = "none";
+	        			}
+	        			this.className = "active";
+	        			that.divs[i].style.display = "block"
+	        		}
+	        	}
+	        }
+	        Tab.prototype.autoPlay = function(){
+	        	setInterval(() =>{
+	        		this.n ++;
+	        		if(this.n > this.inputs.length-1){
+	        			this.n = 0;
+	        		}
+	        		for( var i = 0; i < this.inputs.length; i++ ){
+	        			this.inputs[i].className = "";
+	        			this.divs[i].style.display = "none";
+	        		}
+	        		this.inputs[this.n].calssName = "active";
+	        		this.divs[this.n].style.display = "block";
+	        	},1000)
+	        }
+	        
+	        let t = new Tab(box);
+	        t.init();
+	        t.autoPlay();
+        </script>
+	</body>
+</html>

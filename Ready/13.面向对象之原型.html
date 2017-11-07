@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<script>		
+
+		function Car(color,sites){
+			this.color = color;
+			this.sites = sites;
+
+			//如果把这个city写到构造函数上，那么通过这个构造函数创建出来的对象所拥有的的都是同一个city属性，
+			//我们考虑把这些公有的属性和方法放到构造函数的原型上。
+			/*this.city = "北京";
+			this.run(){
+				console.log("跑");
+			}*/
+		}
+		Car.prototype.city = "北京";
+		Car.prototype.run = function(){
+			//console.log("跑");
+		}
+
+		let car1 = new Car("red",7);
+		//console.log(car1.run);
+
+		let arr1 = new Array();
+		
+		//console.log(arr1);//打印出来的是一个空数组，length为0，其中的__proto__:Array(0)
+		//console.log("-----------------------");
+		//console.log(arr1.constructor);//function Array() { [native code] }
+		//数组上的__proto__指向的是创建数组的Array构造函数的原型，原型就是prototype.
+
+		function Info (){
+
+		}
+		let i = new Info();
+		console.log(i);//由构造函数创建出来的对象；
+		console.log(Info.prototype.constructor);//构造函数原型上的constructor指向的是构造函数本身
+
+		let i2 = new Info();
+
+		console.log(Info.constructor === Info);//false
+		console.log(i.constructor === Info);//true
+		console.log("------------------------");
+		//constructor 可以被改写
+		Info.prototype.constructor = function(){
+			console.log("我被改写了");
+		}
+		console.log(Info.constructor === Info);
+		console.log(i.constructor === Info);
+		console.log(Info.constructor===Info);//false
+		console.log(i.constructor===Info);//true
+
+		let arr = new Array();
+		let obj = new Object();
+
+		console.log(arr.constructor === Array);
+		console.log(obj.constructor === Object);
+	</script>
+
+
+	</body>
+</html>

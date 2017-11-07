@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box div,#box2 div{
+				width:100px;
+				height:100px;
+				font:50px/100px "宋体";
+				background：yellow;
+				display:none;
+			}
+			.active{
+				background:blue;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div  id = "box">
+            <input type = "button" value = "按钮1" class="active"/>
+            <input type = "button" value = "按钮2"/>
+            <input type = "button" value = "按钮3"/>
+            <div style = "display:block">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div  id = "box2">
+            <input type = "button" value = "按钮1" class="active"/>
+            <input type = "button" value = "按钮2"/>
+            <input type = "button" value = "按钮3"/>
+            <div style = "display:block">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <button class = "start1">box1开始自动轮播</button>
+        <button class = "stop1">停止box2自动轮播</button>
+        <script>
+        	window.onload = function(){
+        		//分析：
+	        	/*
+					点击不同的按钮对应的div显示出来，点击的按钮添加背景颜色；
+	        	*/
+	        	//停止按钮：
+	        	var btn1 = document.getElementsByClassName("stop1")[0];
+	        	let start = document.getElementsByClassName("start1")[0];
+	        	
+	        	let box = document.getElementById("box");
+				let box2 = document.getElementById("box2");
+
+	        	function Tab(parent){
+	                this.inputs = parent.getElementsByTagName("input");
+					this.divs = parent.getElementsByTagName("div");
+	                //console.log(this);这里的this指向的是Tab构造函数创建出来的实例对象
+	                //给构造函数添加一个定时器，自动轮播
+	                this.timer = null;
+	                this.n = 0;
+	            }
+
+
+	            Tab.prototype.init = function(){
+	            	//console.log(this);//此时的this仍然指向的是Tab这个构造函数创造出来的额实例对象；但是在for循环中的this指向的则是触发点击事件的元素
+	            	let that = this;
+	            	for( let i = 0; i < that.inputs.length; i++ ){
+	            		console.log(this);
+	            		that.inputs[i].onclick = function(){
+	            			console.log(this);
+	            			for( var j = 0; j < that.inputs.length; j++ ){
+	            				that.inputs[j].className = "";
+	            				that.divs[j].style.display = "none";
+	            			}
+	            			console.log(i);
+	            			this.className = "active";
+	            			that.divs[i].style.display = "block";
+	            		}
+	            	}
+	            }
+
+	            Tab.prototype.autoPlay = function(){
+	            	
+	            	
+	            	if(this.timer){
+	            		return;
+	            	}
+	            	//创建一个定时器
+	            	this.timer = setInterval(() => {
+	            		this.n++;//利用箭头函数使函数中的this指向函数创建时所在定义域中的this，也就是实例。
+	            		if(this.n>this.inputs.length-1){
+	            			this.n = 0;
+	            		}
+	            		for( var i = 0; i < this.inputs.length; i++ ){
+	            			this.inputs[i].className = "";
+	            			this.divs[i].style.display = "none";
+	            		}
+	            		this.inputs[this.n].className = "active";
+	            		this.divs[this.n].style.display = "block";
+	            	},500)
+	            }
+	            Tab.prototype.stopPlay = function(){
+	            	clearInterval(this.timer);
+	            	this.timer =  null;
+	            }
+
+
+	        	let t = new Tab(box);
+	        	t.init();
+	        	let t2 = new Tab(box2);
+	        	t2.autoPlay();
+	        	btn1.onclick = function(){
+	        		t2.stopPlay()
+	        	};
+	        	start.onclick = function(){
+	        		t.autoPlay();
+	        	}
+        	}
+        	
+        </script>
+	</body>
+</html>
