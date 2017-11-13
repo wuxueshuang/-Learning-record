@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+	<script>
+		//下面程序的运行结果：
+		var name = "World!";
+		(function () {
+		    if (typeof name === 'undefined') {
+		        var name = 'Jack';
+		        console.log('Goodbye ' + name);
+		    } else {
+		        console.log('Hello ' + name);
+		    }
+		})();//Goodbye Jack
+		/*
+			分析：
+			虽然已经声明了name这个变量，但是在函数预解析的时候有一个变量提升的功能，
+			变量name提升到了整个作用域的上面，此时name未赋值，这个时候匿名函数自执行
+			，函数里面没有变量name，就会沿着作用域链找到外层name，此时是underfined。
+			所以结果是Goodbye Jack！
+		*/
+
+	</script>
+	</body>
+</html>

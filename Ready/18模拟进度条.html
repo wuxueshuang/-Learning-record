@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.loading {
+			  display: table;
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  width: 100%;
+			  height: 100%;
+			  background-color: #fff;
+			  z-index: 5;
+			}
+			 
+			.loading .progress {
+			  display: table-cell;
+			  vertical-align: middle;
+			  text-align: center;
+			}
+		</style>
+		<script src = "../src/jquery-3.2.1.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="loading" id="loading">
+	    	<div class="progress" id="progress">0%</div>
+	    </div>
+	    <script>
+	    	let $loading = $('#loading')
+			let $progress = $('#progress')
+			let prg = 0  // 初始化进度 
+
+			
+			/*let timer = window.setInterval(()=>{
+				if(prg >= 100){
+					window.clearInterval(timer);
+					prg = 100;
+				}else{
+					prg++
+				}
+				$progress.html(prg + '%')
+			},100)
+			window.onload = () => {
+			 // $loading.hide()
+			}*/
+
+			/*
+				效果不错，但是有个问题，万一window loaded太慢了，导致进度显示load到100%了，
+				loading还没有隐藏，那就打脸了。所以，我们需要让loading在window loaded的时
+				候才到达终点，在这之前，loading可以保持一个等待的状态，比如在80%的时候，
+				先停一停，然后在loaded的时候快速将进度推至100%。这个做法是目前绝大部份进
+				度条的做法。
+			*/
+
+			let timer = window.setInterval(()=>{
+				if(prg>=80){
+					window.clearInterval(timer);
+					prg = 100;
+				}else{
+					prg++;
+				}
+				$progress.html(prg + '%');
+				console.log(prg);
+			},100)
+			window.onload = ()=>{
+				window.clearInterval(timer);
+				window.setInterval(() =>{
+					if(prg >= 100){ // 到达终点，关闭定时器
+						window.clearInterval(timer);
+						prg = 100;
+						$loading.hide()
+					}else{
+						prg++
+					}
+					$progress.html(prg + '%')
+			   		//console.log(prg)
+			 	}, 10)  // 时间间隔缩短
+			}
+
+	    </script>
+	</body>
+</html>

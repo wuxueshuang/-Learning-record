@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				js中的数据类型：
+				Number,String,Boolean,Object,Underfined,Null,Symbol
+
+				其中Object包含：
+					1.Array,
+					2.Function,
+					3.Date,
+					4.RegExp(正则)
+			*/
+			//函数会尝试逐个解析字符串中的字符，直到遇上一个无法被解析成数字的字符，然后返回该字符前所有数字字符组成的数字
+			//console.log(parseFloat('10.2abc'));//10.2
+			//console.log(parseInt('10.2abc'));//10
+			//console.log('hello'.charAt(2));//l
+			//console.log("hello, world".replace("hello", "goodbye"));//goodbye, world
+
+			function abc(){
+				var a = 0;
+				console.log(a);
+			};
+			//console.log(a);//a is not defined
+			abc();
+			//console.log(a);
+			let c = "hello" + "world";
+			console.log(c);//hello world
+			let d = 3+4+"2";
+			console.log(d);//72
+			let e = 3+4+5;
+			console.log(e);//12
+			let f = '6'+2+0;
+			console.log(f);//620
+
+			//比较运算符：
+			console.log(123 == "123");//true 相等
+			console.log(true == "1");//true  相等 
+			console.log(true === 1);//三个等号代表全等  false
+
+			//while 循环  ，do-while循环
+			/*while(true){
+				console.log(1);//无限循环
+			}*/
+
+			//条件分支：
+			//if语句，switch语句
+			let myCard = 0;
+			if(myCard >= 5){
+				myCard = 0;
+				console.log(myCard);
+			}else{
+				myCard++;
+				console.log(myCard);
+			}
+			switch(myCard){
+				case myCard==0:
+					console.log(myCard);
+					myCard++;
+					break;
+				case myCard >=5:
+					myCard=0;
+					console.log(myCard);
+					break;
+				default:
+					console.log(myCard);
+			}
+
+			//es6中的扩展运算符
+			let obj = {
+				img:"img",
+				parentDt:0,
+				url:"http://i123.jpg"
+			}
+			let {img,parentDt,url} = obj; 
+			//console.log(img,parentDt,url);
+
+
+			//创建一个原型：
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			let worker = new Person("smith",28);
+			console.log(worker);//Person {name: "smith", age: 28}
+
+			let newObj = new Person;
+			newObj.name = "lily";
+			newObj['name'] = "lucy";			
+			newObj.name = "我又更改了";
+			console.log(newObj)//Person {name: "我又更改了", age: undefined}
+		</script>
+	</body>
+</html>

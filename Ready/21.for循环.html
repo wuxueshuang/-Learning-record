@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+			
+			*/
+		
+			//第一种：
+			for( var i = 0; i < 100; i++ ){
+				//console.log(i);
+			}
+
+			//第二种方法是使用 for...in 循环。注意，如果有人向 Array.prototype 添加了新的属性，使用这样的循环这些属性也同样会被遍历。所以并不推荐这种方法：
+			//遍历数组的另一种方法是使用 for...in 循环。注意，如果有人向 Array.prototype 添加了新的属性，使用这样的循环这些属性也同样会被遍历。所以并不推荐这种方法：
+			
+			//for (var i in a) {
+			  // Do something with a[i]
+			//}
+
+			//ES5: forEach()
+			["dog", "cat", "hen"].forEach(function(currentValue, index, array) {
+			  // Do something with currentValue or array[index]
+			});
+
+			//求平均数：这个时候穿的参数是一个逗号连接的变量串
+			/*function avg(){
+				let sum = 0;
+				for( var i = 0; i < arguments.length; i++ ){
+					sum += arguments[i];
+				}
+				return sum/arguments.length;
+			}
+			console.log(avg(5,8,6,52,8,7));//14.333333333333334
+			*/
+
+			//下面是求一个数组的平均值，可以这样修改函数：
+			function avg(arr){
+				let sum = 0;
+				for( var i = 0; i < arr.length; i++ ){
+					sum += arr[i];
+				}
+				return sum/arr.length;	
+			}
+			console.log(avg([123,5,4,26,595,123,58]))//133.42857142857142
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.loading {
+			  display: table;
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  width: 100%;
+			  height: 100%;
+			  background-color: #fff;
+			  z-index: 5;
+			}
+			 
+			.loading .progress {
+			  display: table-cell;
+			  vertical-align: middle;
+			  text-align: center;
+			}
+		</style>
+		<script src = "../src/jquery-3.2.1.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="loading" id="loading">
+	    	<div class="progress" id="progress">0%</div>
+	    </div>
+	    <script>
+	    	let Progress = require('ez-progress');
+	    	let prg = new Progress();
+
+	    	let $loading = $("#loading");
+	    	let $progress = $("#progress");
+
+	    	pro.on("progress",function(res){
+	    		let progress = parseInt(res.progress);
+	    		$progress.html(progress + '%');
+	    	});
+	    	pro.go([60,70],function(res){
+		    	  prg.complete(null, [0, 5], [0, 50])  // 飞一般地冲向终点
+			}, [0, 3], [0, 200]);
+			window.onload = function () {
+			  prg.complete(null, [0, 5], [0, 50])  // 飞一般地冲向终点
+			}
+	    </script>
+	</body>
+</html>
