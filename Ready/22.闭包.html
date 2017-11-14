@@ -12,6 +12,12 @@
 	</head>
 
 	<body>
+		<ul id="list" class="foo">
+		  <li>#0</li>
+		  <li><span>#1</span></li>
+		  <li>#2</li>
+		  <li>#3</li>
+		 </ul>
 		<script>
 			function adder(a){
 				return function (b){
@@ -20,8 +26,35 @@
 			}
 			let x = adder(5);
 			let y= adder(20);
-			console.log(x(6));// a = 5,b = 6 返回：11
-			console.log(y(7));// a = 20,b = 7 返回：27
+			//console.log(x(6));// a = 5,b = 6 返回：11
+			//console.log(y(7));// a = 20,b = 7 返回：27
+
+
+			//需求：点击每个li弹窗显示其为当前列表中的第几项。
+			//Es6解法：
+			/*let lis = document.querySelectorAll("li");
+			[...lis].forEach(function(item,index){
+				item.onclick = function(){
+					console.log(index);;
+				}
+			});*/
+			//Es5方法：记录下标
+			/*var lis = document.querySelectorAll("li");
+			for(var i = 0;i < lis.length;i++){
+				lis[i].index = i;
+				lis[i].onclick = function(){
+					console.log(this.index);
+				}
+			}*/
+			//第三种方法：匿名函数自执行
+			var lis = document.querySelectorAll("li");
+			lis.forEach((item,index)=>{
+				(function(index){
+					lis[index].onclick = function(){
+						console.log(index);
+					}
+				})(index)				
+			})
 		</script>
 	</body>
 </html>

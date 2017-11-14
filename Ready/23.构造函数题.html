@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			const obj={a:1,b:2,c:3};
+			/*function foo(o,arr){
+				//请实现方法：
+				//方法一：使用箭头函数
+				var obj={};
+				arr.map((i) =>obj[i]=o[i]);
+				return obj;
+			}
+
+			foo(obj,["a","c"]);//输出 {a:1,c:3}
+			console.log(foo(obj,["a","c"]));//{a: 1, c: 3}*/
+			//方法二：
+			//reduce有两个参数：第一个参数是回掉函数，第二个参数是给回掉函数传的初始值：
+			function foo (o,arr){
+				return arr.reduce((newArr,i) =>{
+					newArr[i] = o[i];
+					return  newArr;
+				},{});
+			}
+			console.log(foo(obj,["a","c"]));
+		</script>
+	</body>
+</html>

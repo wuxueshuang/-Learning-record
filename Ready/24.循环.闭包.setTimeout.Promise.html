@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*for (var i = 0; i < 5; i++) {
+			  console.log(i);//0 1 2 3 4
+			}*/
+
+			/*for (var i = 0; i < 5; i++) {
+			  setTimeout(function() {
+			    console.log(i);//5
+			  }, 1000 * i);
+			}*/
+
+			/*for (var i = 0; i < 5; i++) {
+			  (function(i) {
+			    setTimeout(function() {
+			      console.log(i);// 0 1 2 3 4
+			    }, i * 1000);
+			  })(i);
+			}*/
+
+			for (var i = 0; i < 5; i++) {
+			  (function() {
+			    setTimeout(function() {
+			      console.log(i);//不会报错，虽然函数自执行里没有接受i,但是会沿着作用域链向上找到i，此时i已经是最终值，所以分别打印 5 5 5 5 5
+			    }, i * 1000);
+			  })(i);
+			}
+			/*for (var i = 0; i < 5; i++) {
+
+			//注意在定时器里放入了函数自执行：
+			  setTimeout((function(i) {
+			    console.log(i);// 0 1 2 3 4 //这里自己判断错了，自己的答案是最终值5
+			  })(i), i * 1000);
+			}*/
+
+			/*setTimeout(function() {
+			  console.log(1);//第五步打印1
+			}, 0);
+			new Promise(function executor(resolve) {
+			  console.log(2);//第一步先打印2
+			  for( var i = 0 ; i< 10000 ; i++ ) {
+			    i == 9999 && resolve();
+			  }
+			  console.log(3);//第二步打印3；
+			}).then(function() {
+			  console.log(4);//第四步打印4
+			});
+			console.log(5);//第三步打印5*/
+			//控制台依次打印： 2 3 5 4 1
+		</script>
+	</body>
+</html>
